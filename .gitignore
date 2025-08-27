@@ -14,9 +14,6 @@ env
 .idx/
 .vs/
 
-# UV
-uv.lock
-
 # Instance Folder
 instance/
 
