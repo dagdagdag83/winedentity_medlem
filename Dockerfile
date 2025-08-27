@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get clean
 
 # Install any needed packages specified in requirements.txt
-RUN /root/.cargo/bin/uv pip install --system --no-cache -r requirements.txt
+RUN uv pip install --system --no-cache -r requirements.txt
 
 # Copy the rest of the application's code
 COPY . .
