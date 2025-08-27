@@ -1,29 +1,35 @@
-# Use an official Python runtime as a parent image
-FROM python:3.13-slim
+# 1. Build stage
+FROM python:3.13-slim as builder
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the requirements file into the container at /app
-COPY requirements.txt .
-
-# Install curl, then use it to install uv, then remove curl to keep the image slim
+# Install uv
 RUN apt-get update && apt-get install -y curl && \
     curl -LsSf https://astral.sh/uv/install.sh | sh && \
     apt-get remove -y curl && \
     apt-get clean
 
-# Install any needed packages specified in requirements.txt
-RUN uv pip install --system --no-cache -r requirements.txt
+# Create a virtual environment
+RUN python -m venv /opt/venv
 
-# Copy the rest of the application's code
+# Install dependencies using the full path to uv
+COPY requirements.txt .
+RUN /root/.cargo/bin/uv pip install --no-cache -r requirements.txt -p /opt/venv/bin/python
+
+# 2. Final stage
+FROM python:3.13-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the virtual environment from the build stage
+COPY --from=builder /opt/venv /opt/venv
+
+# Copy the application code
 COPY . .
 
-# Make port 8080 available to the world outside this container
+# Make port 8080 available
 EXPOSE 8080
-
-# Define environment variable
 ENV PORT 8080
 
-# Run app.py when the container launches
+# Activate the virtual environment and run the application
+ENV PATH="/opt/venv/bin:${PATH}"
 CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
