@@ -3,9 +3,9 @@ FROM ghcr.io/astral-sh/uv:python3.13-bookworm as builder
 
 WORKDIR /app
 
-RUN uv sync --locked --no-install-project --no-dev
-
 COPY . /app
+
+RUN uv sync --locked --no-install-project --no-dev
 
 RUN uv sync --locked --no-dev
 
