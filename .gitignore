@@ -11,6 +11,13 @@ env
 # IDEs
 .idea/
 .vscode/
+.idx/
+
+# UV
+uv.lock
 
 # Instance Folder
 instance/
+
+# DANGER!
+local_key.json
