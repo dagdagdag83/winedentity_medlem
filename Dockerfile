@@ -1,5 +1,5 @@
 # 1. Build stage
-FROM ghcr.io/astral-sh/uv:python3.13-bookworm as builder
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm AS builder
 
 WORKDIR /app
 
@@ -23,7 +23,7 @@ COPY . .
 
 # Make port 8080 available
 EXPOSE 8080
-ENV PORT 8080
+ENV PORT=8080
 
 # Activate the virtual environment and run the application
 ENV PATH="/app/.venv/bin:${PATH}"
