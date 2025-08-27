@@ -414,6 +414,7 @@ dependencies = [
     { name = "google-cloud-datastore" },
     { name = "gunicorn" },
     { name = "python-dotenv" },
+    { name = "requests" },
 ]
 
 [package.metadata]
@@ -423,6 +424,7 @@ requires-dist = [
     { name = "google-cloud-datastore", specifier = ">=2.21.0" },
     { name = "gunicorn", specifier = ">=23.0.0" },
     { name = "python-dotenv", specifier = ">=1.1.1" },
+    { name = "requests", specifier = ">=2.32.5" },
 ]
 
 [[package]]
