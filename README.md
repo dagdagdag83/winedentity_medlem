@@ -1,6 +1,6 @@
 # Flask App with Google Cloud Firestore
 
-This is a simple Flask application that uses Google Cloud Firestore as a database.
+This is a simple Flask application that uses Google Cloud Firestore as a database. 
 
 ## Local Development Setup
 
