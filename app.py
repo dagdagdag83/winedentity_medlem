@@ -1,15 +1,37 @@
 import os
 import datetime
-from flask import Flask, render_template, redirect, url_for, flash, session
+from flask import Flask, render_template, redirect, url_for, flash, session, request
+from flask_babel import Babel, _
 from forms import RegistrationForm
 from db import Database
 
 # Initialize Flask App
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'a_hard_to_guess_string')
+app.config['BABEL_DEFAULT_LOCALE'] = 'nb'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+
+# Initialize Babel
+babel = Babel(app)
+
+def get_locale():
+    if 'lang' in session:
+        return session['lang']
+    return request.accept_languages.best_match(['en', 'nb'])
+
+babel.init_app(app, locale_selector=get_locale)
+
+@app.context_processor
+def inject_get_locale():
+    return dict(get_locale=get_locale)
 
 # Initialize Database
 db_manager = Database()
+
+@app.route('/lang/<lang>')
+def set_language(lang=None):
+    session['lang'] = lang
+    return redirect(url_for('index'))
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -20,7 +42,12 @@ def index():
 
             member_data = {
                 'full_name': form.full_name.data,
+                'address': form.address.data,
+                'postal_code': form.postal_code.data,
+                'country': form.country.data,
                 'email': form.email.data,
+                'phone': form.phone.data,
+                'company': form.company.data,
                 'membership_number': member_number,
                 'registration_date': datetime.datetime.now(datetime.timezone.utc)
             }
@@ -30,7 +57,7 @@ def index():
             session['full_name'] = form.full_name.data
             return redirect(url_for('success'))
         except Exception as e:
-            flash(f'An error occurred: {e}', 'danger')
+            flash(_('An error occurred: %(error)s', error=e), 'danger')
     return render_template('index.html', form=form)
 
 @app.route('/success')

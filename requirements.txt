@@ -3,3 +3,4 @@ Flask-WTF
 google-cloud-firestore
 python-dotenv
 gunicorn
+Flask-Babel
