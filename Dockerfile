@@ -26,5 +26,5 @@ EXPOSE 8080
 ENV PORT 8080
 
 # Activate the virtual environment and run the application
-ENV PATH="/opt/venv/bin:${PATH}"
+ENV PATH="/app/.venv/bin:${PATH}"
 CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
