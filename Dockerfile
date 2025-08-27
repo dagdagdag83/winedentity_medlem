@@ -1,19 +1,13 @@
 # 1. Build stage
-FROM python:3.13-slim as builder
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm as builder
 
-# Create a virtual environment
-RUN python -m venv /opt/venv
+WORKDIR /app
 
-# Copy requirements file
-COPY requirements.txt .
+RUN uv sync --locked --no-install-project --no-dev
 
-# Install uv and then immediately use it to install dependencies in a single layer.
-# This avoids any PATH issues. Finally, clean up.
-RUN apt-get update && apt-get install -y curl && \
-    curl -LsSf https://astral.sh/uv/install.sh | sh && \
-    /root/.cargo/bin/uv pip install --no-cache -r requirements.txt -p /opt/venv/bin/python && \
-    apt-get remove -y curl && \
-    apt-get clean
+COPY . /app
+
+RUN uv sync --locked --no-dev
 
 # 2. Final stage
 FROM python:3.13-slim
@@ -22,7 +16,7 @@ FROM python:3.13-slim
 WORKDIR /app
 
 # Copy the virtual environment from the build stage
-COPY --from=builder /opt/venv /opt/venv
+COPY --from=builder --chown=app:app /app /app
 
 # Copy the application code
 COPY . .
