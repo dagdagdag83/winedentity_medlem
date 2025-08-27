@@ -1,14 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
-from wtforms.validators import DataRequired, Email, Length
-from flask_babel import lazy_gettext as _l
+from wtforms.validators import DataRequired, Length
 
 class RegistrationForm(FlaskForm):
-    full_name = StringField(_l('Full Name'), validators=[DataRequired()])
-    address = StringField(_l('Address'), validators=[DataRequired()])
-    postal_code = StringField(_l('Postal Code'), validators=[DataRequired(), Length(min=4, max=10)])
-    country = SelectField(_l('Country'), choices=[('NO', 'Norway'), ('SE', 'Sweden'), ('DK', 'Denmark'), ('FI', 'Finland'), ('GB', 'United Kingdom'), ('US', 'United States')], validators=[DataRequired()])
-    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
-    phone = StringField(_l('Phone'), validators=[DataRequired()])
-    company = StringField(_l('Company (optional)'))
-    submit = SubmitField(_l('Register'))
+    full_name = StringField('Fullt Navn', validators=[DataRequired()])
+    address = StringField('Adresse', validators=[DataRequired()])
+    postal_code = StringField('Postnummer', validators=[DataRequired(), Length(min=4, max=10)])
+    country = SelectField('Land', choices=[('NO', 'Norge'), ('SE', 'Sverige'), ('DK', 'Danmark'), ('FI', 'Finland'), ('GB', 'Storbritannia'), ('US', 'USA')], validators=[DataRequired()])
+    email = StringField('E-post', validators=[DataRequired()])
+    phone = StringField('Telefon', validators=[DataRequired()])
+    company = StringField('Firma (valgfritt)')
+    submit = SubmitField('Registrer deg')

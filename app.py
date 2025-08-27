@@ -1,44 +1,29 @@
 import os
 import datetime
+import logging
 from flask import Flask, render_template, redirect, url_for, flash, session, request
-from flask_babel import Babel, _
 from forms import RegistrationForm
 from db import Database
 
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+
 # Initialize Flask App
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'a_hard_to_guess_string')
-app.config['BABEL_DEFAULT_LOCALE'] = 'nb'
-app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
-
-# Initialize Babel
-babel = Babel(app)
-
-def get_locale():
-    if 'lang' in session:
-        return session['lang']
-    return request.accept_languages.best_match(['en', 'nb'])
-
-babel.init_app(app, locale_selector=get_locale)
-
-@app.context_processor
-def inject_get_locale():
-    return dict(get_locale=get_locale)
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SESSION_SECRET_KEY', 'a_hard_to_guess_string')
 
 # Initialize Database
 db_manager = Database()
 
-@app.route('/lang/<lang>')
-def set_language(lang=None):
-    session['lang'] = lang
-    return redirect(url_for('index'))
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = RegistrationForm()
+    logging.debug(f"Request method: {request.method}")
     if form.validate_on_submit():
+        logging.debug("Form validation successful.")
         try:
             member_number = db_manager.get_next_member_number()
+            logging.debug(f"Next member number: {member_number}")
 
             member_data = {
                 'full_name': form.full_name.data,
@@ -51,20 +36,26 @@ def index():
                 'membership_number': member_number,
                 'registration_date': datetime.datetime.now(datetime.timezone.utc)
             }
+            logging.debug(f"Member data: {member_data}")
             db_manager.add_member(member_data)
+            logging.debug("Member data added to the database.")
 
             session['membership_number'] = member_number
             session['full_name'] = form.full_name.data
             return redirect(url_for('success'))
         except Exception as e:
-            flash(_('An error occurred: %(error)s', error=e), 'danger')
-    return render_template('index.html', form=form)
+            logging.error(f"An error occurred: {e}", exc_info=True)
+            flash(f'An error occurred: {e}', 'danger')
+    elif request.method == 'POST':
+        logging.warning("Form validation failed.")
+        logging.debug(f"Form errors: {form.errors}")
+    return render_template('index.jinja2', form=form)
 
 @app.route('/success')
 def success():
     membership_number = session.get('membership_number', 'N/A')
     full_name = session.get('full_name', 'Member')
-    return render_template('success.html', full_name=full_name, membership_number=membership_number)
+    return render_template('success.jinja2', full_name=full_name, membership_number=membership_number)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

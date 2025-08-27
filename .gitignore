@@ -12,6 +12,7 @@ env
 .idea/
 .vscode/
 .idx/
+.vs/
 
 # UV
 uv.lock

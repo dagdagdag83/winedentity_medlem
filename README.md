@@ -58,12 +58,12 @@ This is a simple Flask application that uses Google Cloud Firestore as a databas
 
     *   **Linux/macOS:**
         ```bash
-        export GOOGLE_APPLICATION_CREDENTIALS="/local_key.json"
+        export GOOGLE_APPLICATION_CREDENTIALS="local_key.json"
         ```
 
     *   **Windows (PowerShell):**
         ```powershell
-        $env:GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/local_key.json"
+        $env:GOOGLE_APPLICATION_CREDENTIALS="local_key.json"
         ```
 
     Replace `/path/to/your/local_key.json` with the actual path to your key file.

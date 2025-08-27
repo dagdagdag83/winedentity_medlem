@@ -1,0 +1,59 @@
+{% extends "base.jinja2" %}
+
+{% block title %}Winedentity Medlemskap{% endblock %}
+
+{% block content %}
+<div class="p-4">
+  <h1 class="text-3xl font-bold text-left text-[#741b79] mb-2">Medlemskapsregistrering</h1>
+  <div class="text-gray-600 mb-4 text-left">
+    <p>Bli medlem av Foreningen Winedentity ved å fylle ut skjemaet nedenfor.</p>
+    <p>Medlemskapet koster 500 kr per år, som kan betales med Vipps eller bankoverføring. Etter at du har fylt ut skjemaet vil du få informasjon om betaling.</p>
+    <p>Kun etter at du har betalt medlemsavgiften vil du være et fullverdig medlem av Foreningen Winedentity.</p>
+  </div>
+  <form method="POST" action="{{ url_for('index') }}" class="space-y-4">
+    {{ form.hidden_tag() }}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        {{ form.full_name.label(class="block text-sm font-medium text-gray-700") }}
+        {{ form.full_name(class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#fbbd19] focus:border-[#fbbd19] sm:text-sm") }}
+      </div>
+      <div>
+        {{ form.company.label(class="block text-sm font-medium text-gray-700") }}
+        {{ form.company(class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#fbbd19] focus:border-[#fbbd19] sm:text-sm") }}
+      </div>
+    </div>
+
+    <div>
+      {{ form.address.label(class="block text-sm font-medium text-gray-700") }}
+      {{ form.address(class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#fbbd19] focus:border-[#fbbd19] sm:text-sm") }}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        {{ form.postal_code.label(class="block text-sm font-medium text-gray-700") }}
+        {{ form.postal_code(class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#fbbd19] focus:border-[#fbbd19] sm:text-sm") }}
+      </div>
+      <div>
+        {{ form.country.label(class="block text-sm font-medium text-gray-700") }}
+        {{ form.country(class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#fbbd19] focus:border-[#fbbd19] sm:text-sm") }}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        {{ form.email.label(class="block text-sm font-medium text-gray-700") }}
+        {{ form.email(class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#fbbd19] focus:border-[#fbbd19] sm:text-sm") }}
+      </div>
+      <div>
+        {{ form.phone.label(class="block text-sm font-medium text-gray-700") }}
+        {{ form.phone(class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#fbbd19] focus:border-[#fbbd19] sm:text-sm") }}
+      </div>
+    </div>
+
+    <div class="pt-2">
+      {{ form.submit(class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#741b79] hover:bg-[#5f1563] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#fbbd19]") }}
+    </div>
+  </form>
+</div>
+{% endblock %}
