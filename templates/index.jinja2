@@ -94,6 +94,7 @@
     });
 
     new TomSelect("#country",{
+      maxOptions: null,
       options: {{ countries_json|safe }},
       valueField: 'value',
       labelField: 'text',
