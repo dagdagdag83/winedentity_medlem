@@ -2,6 +2,7 @@ import os
 import datetime
 import logging
 import requests
+import json
 from flask import Flask, render_template, redirect, url_for, flash, session, request
 from forms import RegistrationForm
 from db import Database
@@ -65,6 +66,7 @@ def index():
 
                 member_data = {
                     'full_name': form.full_name.data,
+                    'birth_date': datetime.datetime.combine(form.birth_date.data, datetime.time.min),
                     'address': form.address.data,
                     'postal_code': form.postal_code.data,
                     'country': form.country.data,
@@ -88,7 +90,10 @@ def index():
             logging.warning("Form validation failed.")
             logging.debug(f"Form errors: {form.errors}")
 
-    return render_template('index.jinja2', form=form)
+    # Pass countries to the template as a JSON object
+    countries_json = json.dumps([{'value': value, 'text': text} for value, text in form.country.choices])
+    
+    return render_template('index.jinja2', form=form, countries_json=countries_json)
 
 @app.route('/success')
 def success():
