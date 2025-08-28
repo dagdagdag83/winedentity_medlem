@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
+from wtforms import StringField, SubmitField, SelectField, BooleanField
 from wtforms.validators import DataRequired, Length
 
 class RegistrationForm(FlaskForm):
@@ -10,4 +10,5 @@ class RegistrationForm(FlaskForm):
     email = StringField('E-post', validators=[DataRequired()])
     phone = StringField('Telefon', validators=[DataRequired()])
     company = StringField('Firma (valgfritt)')
+    confirm = BooleanField('Jeg bekrefter at opplysningene gitt er riktige.', validators=[DataRequired()])
     submit = SubmitField('Registrer deg')
