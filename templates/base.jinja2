@@ -20,7 +20,7 @@
       }
       body {
         font-family: 'Inter', sans-serif;
-        padding: 1rem;
+        padding: 0.5rem;
       }
       .ts-control {
         font-family: 'Inter', sans-serif;
@@ -40,10 +40,10 @@
     </style>
   </head>
   <body class="bg-white">
-    <div class="mt-4 px-4">
+    <div class="mt-2 px-4">
       <div class="max-w-4xl w-full mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="h-60 bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='header_2.jpg') }}');"></div>
-        <main class="px-8 pb-8">
+        <div class="h-40 bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='header_2_smaller.jpg') }}');"></div>
+        <main class="px-6 pb-6">
             {% block content %}{% endblock %}
         </main>
       </div>

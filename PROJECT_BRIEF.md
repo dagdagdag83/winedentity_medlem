@@ -2,7 +2,7 @@
 
 ### **1. Project Overview** 📜
 
-Build a simple Python Flask web application for "Foreningen Winedentity" to handle new membership registrations. The site will feature a single form. Upon submission, the backend will validate the data, save it to a **Firebase Firestore** database which will act as the official **membership register** ("medlemsregister"), and then display a confirmation page with a unique **membership number** ("medlemsnummer").
+Build a simple Python Flask web application for "Foreningen Winedentity" to handle new membership registrations. The site will feature a single form. Upon submission, the backend will validate the data, save it to a **Google Cloud Datastore** database which will act as the official **membership register** ("medlemsregister"), and then display a confirmation page with a unique **membership number** ("medlemsnummer").
 
 ***
 
@@ -10,19 +10,19 @@ Build a simple Python Flask web application for "Foreningen Winedentity" to hand
 
 * **Backend:** Python 3.13, Flask
 * **Forms:** Flask-WTF for form creation and validation.
-* **Frontend:** Jinja2 for HTML templating, styled with **Bootstrap 5**.
-* **Database:** Google Firebase Firestore.
+* **Frontend:** Jinja2 for HTML templating, styled with **UnoCSS and custom styles**.
+* **Database:** Google Cloud Datastore.
 
 ***
 
 ### **3. Core Features & User Flow** ➡️
 
-1.  **Display Form:** The main page (`/`) will display the membership registration form. The HTML template for the form must use **Bootstrap 5** for layout and styling.
+1.  **Display Form:** The main page (`/`) will display the membership registration form. The HTML template for the form must use **UnoCSS and custom styles** for layout and styling.
 2.  **Submission & Validation:**
     * On form submission (`POST` request), the Flask backend uses Flask-WTF to validate the input.
-    * If validation fails, the form should be re-displayed with clear, Bootstrap-styled error messages.
+    * If validation fails, the form should be re-displayed with clear, styled error messages.
 3.  **Data Processing & Storage:**
-    * If validation succeeds, the backend connects to Firestore.
+    * If validation succeeds, the backend connects to Datastore.
     * It generates a **new, unique, sequential membership number**. For example, if the last member was #1023, the new one should be #1024.
     * It saves the member's data from the form, the new membership number, and a `registration_date` timestamp as a new document in the `members` collection.
 4.  **Confirmation:**
@@ -33,7 +33,7 @@ Build a simple Python Flask web application for "Foreningen Winedentity" to hand
 
 ### **4. Form & Data Model (Placeholder)** 📝
 
-The exact form fields and the final Firestore data model will be provided later.
+The exact form fields and the final Datastore data model will be provided later.
 
 For now, please implement a **dummy model** to build the application's core logic. The placeholder form should include at least a `full_name` (Text, Required) and `email` (Email, Required) field to ensure the end-to-end flow can be tested.
 

@@ -3,14 +3,15 @@
 {% block title %}Winedentity Medlemskap{% endblock %}
 
 {% block content %}
-<div class="p-4">
-  <h1 class="text-3xl font-bold text-left text-[#741b79] mb-2">Medlemskapsregistrering</h1>
-  <div class="text-gray-600 mb-4 text-left">
-    <p>Bli medlem av Foreningen Winedentity ved å fylle ut skjemaet nedenfor.</p>
-    <p>Medlemskapet koster 500 kr per år, som kan betales med Vipps eller bankoverføring. Etter at du har fylt ut skjemaet vil du få informasjon om betaling.</p>
-    <p>Kun etter at du har betalt medlemsavgiften vil du være et fullverdig medlem av Foreningen Winedentity.</p>
+<div class="p-2">
+  <h1 class="text-3xl font-bold text-left text-[#741b79] mb-1">Medlemskapsregistrering</h1>
+  <div class="text-gray-600 mb-2 text-left">
+    <p>
+      Bli medlem av Foreningen Winedentity ved å fylle ut skjemaet nedenfor.<br>
+      Medlemskapet koster 500 kr per år, som kan betales med Vipps eller bankoverføring. Etter at du har fylt ut skjemaet vil du få informasjon om betaling. Kun etter at du har betalt medlemsavgiften vil du være et fullverdig medlem av Foreningen Winedentity.
+    </p>
   </div>
-  <form method="POST" action="{{ url_for('index') }}" class="space-y-4">
+  <form method="POST" action="{{ url_for('index') }}" class="space-y-2">
     {{ form.hidden_tag() }}
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -57,7 +58,7 @@
       </div>
     </div>
 
-    <div class="pt-2">
+    <div class="pt-1">
       <div class="flex items-start">
         {{ form.confirm(class="h-4 w-4 text-[#741b79] focus:ring-[#fbbd19] border-gray-300 rounded") }}
         <div class="ml-3 text-sm">
@@ -68,7 +69,7 @@
       </div>
     </div>
 
-    <div class="pt-2">
+    <div class="pt-1">
       <button class="g-recaptcha w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#741b79] hover:bg-[#5f1563] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#fbbd19]" 
         data-sitekey="{{ config.RECAPTCHA_SITE_KEY }}" 
         data-callback='onSubmit' 
