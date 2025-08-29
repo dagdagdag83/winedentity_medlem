@@ -44,36 +44,50 @@ This is a simple Flask application that uses Google Cloud Firestore as a databas
 
 4.  **Install dependencies:**
 
-    With the virtual environment activated, install the required packages using `uv`:
+    With the virtual environment activated, install the project in editable mode:
 
     ```bash
-    uv pip install -r requirements.txt
+    uv pip install -e .
     ```
+    This command reads the dependencies from `pyproject.toml` and installs them.
 
 ## Running the Application
 
-1.  **Set Google Cloud Credentials:**
+The application can be run in two modes:
 
-    This application requires Google Cloud credentials to connect to Firestore. You need to set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
+### 1. Local Development (with Mock Database)
+
+For local development, you can use a mock in-memory database by setting the `ENV` environment variable. This avoids the need for Google Cloud credentials.
+
+*   **Run the Flask app:**
+    With the virtual environment activated, run the following command:
+
+    ```bash
+    ENV=local flask --app winedentity run
+    ```
+
+    The application will be available at `http://127.0.0.1:5000`.
+
+### 2. Production Mode (with Google Cloud Firestore)
+
+To run the application against the real Google Cloud Firestore database, you need to provide credentials.
+
+*   **Set Google Cloud Credentials:**
+    Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
 
     *   **Linux/macOS:**
         ```bash
-        export GOOGLE_APPLICATION_CREDENTIALS="local_key.json"
+        export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/local_key.json"
         ```
 
     *   **Windows (PowerShell):**
         ```powershell
-        $env:GOOGLE_APPLICATION_CREDENTIALS="local_key.json"
+        $env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\your\local_key.json"
         ```
 
-    Replace `/path/to/your/local_key.json` with the actual path to your key file.
-
-2.  **Run the Flask app:**
-
-    With the virtual environment activated and the environment variable set, you can run the application:
+*   **Run the Flask app:**
+    With the virtual environment activated and credentials set, run the application:
 
     ```bash
-    flask run
+    flask --app winedentity run
     ```
-
-    The application will be available at `http://127.0.0.1:5000`.
