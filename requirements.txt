@@ -1,6 +1,0 @@
-Flask
-Flask-WTF
-google-cloud-datastore
-python-dotenv
-gunicorn
-requests

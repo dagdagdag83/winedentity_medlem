@@ -43,7 +43,7 @@
       </div>
       <div>
         {{ form.country.label(class="block text-sm font-medium text-gray-700") }}
-        {{ form.country(class="mt-1 block w-full") }}
+        {{ form.country(class="mt-1 block w-full", **{'data-countries': countries_json}) }}
       </div>
     </div>
 
@@ -80,41 +80,8 @@
   </form>
 </div>
 
-<script>
-  function onSubmit(token) {
-    document.querySelector('form').submit();
-  }
-</script>
 {% endblock %}
 
 {% block scripts %}
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    flatpickr("#birth_date", {
-      dateFormat: "d/m/Y",
-    });
-
-    new TomSelect("#country",{
-      maxOptions: null,
-      options: {{ countries_json|safe }},
-      valueField: 'value',
-      labelField: 'text',
-      searchField: 'text',
-      render: {
-        option: function(data, escape) {
-          if (data.value === 'XX') {
-            return '<div>' + escape(data.text) + '</div>';
-          }
-          return '<div><span class="flag-icon flag-icon-' + escape(data.value.toLowerCase()) + ' mr-2"></span>' + escape(data.text) + '</div>';
-        },
-        item: function(data, escape) {
-          if (data.value === 'XX') {
-            return '<div>' + escape(data.text) + '</div>';
-          }
-          return '<div><span class="flag-icon flag-icon-' + escape(data.value.toLowerCase()) + ' mr-2"></span>' + escape(data.text) + '</div>';
-        }
-      }
-    });
-  });
-</script>
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 {% endblock %}

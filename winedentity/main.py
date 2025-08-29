@@ -1,48 +1,11 @@
-import os
 import datetime
 import logging
-import requests
 import json
-from flask import Flask, render_template, redirect, url_for, flash, session, request
-from forms import RegistrationForm
-from db import Database
-
-# Configure logging
-logging.basicConfig(level=logging.DEBUG)
-
-# Initialize Flask App
-app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('FLASK_SESSION_SECRET_KEY', 'a_hard_to_guess_string')
-app.config['RECAPTCHA_SITE_KEY'] = os.environ.get('RECAPTCHA_SITE_KEY')
-app.config['RECAPTCHA_SECRET_KEY'] = os.environ.get('RECAPTCHA_SECRET_KEY')
-
-# Initialize Database
-db_manager = Database()
-
-def verify_recaptcha(token):
-    """Verifies the reCAPTCHA token with Google."""
-    if not app.config['RECAPTCHA_SECRET_KEY']:
-        logging.warning("RECAPTCHA_SECRET_KEY is not set. Skipping verification.")
-        return True, 0.9  # Assume success for local development if not set
-
-    try:
-        response = requests.post(
-            'https://www.google.com/recaptcha/api/siteverify',
-            data={
-                'secret': app.config['RECAPTCHA_SECRET_KEY'],
-                'response': token
-            }
-        )
-        result = response.json()
-        logging.debug(f"reCAPTCHA verification result: {result}")
-        
-        if result.get('success') and result.get('score', 0.0) >= 0.5:
-            return True, result.get('score')
-        else:
-            return False, result.get('score')
-    except Exception as e:
-        logging.error(f"Error verifying reCAPTCHA: {e}")
-        return False, 0.0
+from flask import render_template, redirect, url_for, flash, session, request
+from . import app, db_manager
+from .forms import RegistrationForm
+from .utils import verify_recaptcha
+from .countries import COUNTRIES
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -51,7 +14,7 @@ def index():
 
     if request.method == 'POST':
         token = request.form.get('g-recaptcha-response')
-        is_valid, score = verify_recaptcha(token)
+        is_valid, score = verify_recaptcha(token, app.config['RECAPTCHA_SECRET_KEY'])
         logging.debug(f"reCAPTCHA validation: is_valid={is_valid}, score={score}")
 
         if not is_valid:
@@ -91,7 +54,7 @@ def index():
             logging.debug(f"Form errors: {form.errors}")
 
     # Pass countries to the template as a JSON object
-    countries_json = json.dumps([{'value': value, 'text': text} for value, text in form.country.choices])
+    countries_json = json.dumps([{'value': value, 'text': text} for value, text in COUNTRIES])
     
     return render_template('index.jinja2', form=form, countries_json=countries_json)
 
@@ -100,6 +63,3 @@ def success():
     membership_number = session.get('membership_number', 'N/A')
     full_name = session.get('full_name', 'Member')
     return render_template('success.jinja2', full_name=full_name, membership_number=membership_number)
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)

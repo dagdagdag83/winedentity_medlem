@@ -3,11 +3,16 @@ FROM ghcr.io/astral-sh/uv:python3.13-bookworm AS builder
 
 WORKDIR /app
 
-COPY . /app
+# Copy dependency files first for better caching
+COPY pyproject.toml uv.lock ./
 
-RUN uv sync --locked --no-install-project --no-dev
+# Install dependencies into a virtual environment
+# This creates a .venv in /app
+RUN uv sync --no-dev
 
-RUN uv sync --locked --no-dev
+# Copy the rest of the application code
+COPY . .
+
 
 # 2. Final stage
 FROM python:3.13-slim
@@ -15,11 +20,8 @@ FROM python:3.13-slim
 # Set the working directory
 WORKDIR /app
 
-# Copy the virtual environment from the build stage
-COPY --from=builder --chown=app:app /app /app
-
-# Copy the application code
-COPY . .
+# Copy the virtual environment and the application code from the build stage
+COPY --from=builder /app /app
 
 # Make port 8080 available
 EXPOSE 8080
@@ -27,4 +29,4 @@ ENV PORT=8080
 
 # Activate the virtual environment and run the application
 ENV PATH="/app/.venv/bin:${PATH}"
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "winedentity:app"]
