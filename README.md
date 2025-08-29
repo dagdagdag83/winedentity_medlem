@@ -44,42 +44,50 @@ This is a simple Flask application that uses Google Cloud Firestore as a databas
 
 4.  **Install dependencies:**
 
-    With the virtual environment activated, install the required packages using `uv`:
+    With the virtual environment activated, install the project in editable mode:
 
     ```bash
     uv pip install -e .
     ```
+    This command reads the dependencies from `pyproject.toml` and installs them.
 
 ## Running the Application
 
-1.  **Set Environment Variables:**
+The application can be run in two modes:
 
-    This application requires several environment variables to be set. You can create a `.env` file in the project root and add the following:
+### 1. Local Development (with Mock Database)
+
+For local development, you can use a mock in-memory database by setting the `ENV` environment variable. This avoids the need for Google Cloud credentials.
+
+*   **Run the Flask app:**
+    With the virtual environment activated, run the following command:
 
     ```bash
-    # For local development with a mock database
-    ENV="local"
-    
-    # For connecting to Google Cloud Firestore
-    # GOOGLE_APPLICATION_CREDENTIALS="local_key.json"
-
-    # Flask session secret key
-    FLASK_SESSION_SECRET_KEY="a_secure_random_string"
-
-    # reCAPTCHA keys
-    RECAPTCHA_SITE_KEY="your_recaptcha_site_key"
-    RECAPTCHA_SECRET_KEY="your_recaptcha_secret_key"
-    ```
-    
-    **Note:** For local development, setting `ENV="local"` will use a mock database. If you want to use Google Cloud Firestore, you'll need to provide the `GOOGLE_APPLICATION_CREDENTIALS`.
-
-2.  **Run the Flask app:**
-
-    With the virtual environment activated and the environment variables set, you can run the application:
-
-    ```powershell
-    $env:FLASK_APP="winedentity"
-    flask run
+    ENV=local flask --app winedentity run
     ```
 
     The application will be available at `http://127.0.0.1:5000`.
+
+### 2. Production Mode (with Google Cloud Firestore)
+
+To run the application against the real Google Cloud Firestore database, you need to provide credentials.
+
+*   **Set Google Cloud Credentials:**
+    Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
+
+    *   **Linux/macOS:**
+        ```bash
+        export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/local_key.json"
+        ```
+
+    *   **Windows (PowerShell):**
+        ```powershell
+        $env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\your\local_key.json"
+        ```
+
+*   **Run the Flask app:**
+    With the virtual environment activated and credentials set, run the application:
+
+    ```bash
+    flask --app winedentity run
+    ```
