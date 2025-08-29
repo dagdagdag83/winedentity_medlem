@@ -1,8 +1,6 @@
 import os
 import logging
 from flask import Flask
-from .db import Database
-from .mock_db import MockDatabase
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -16,9 +14,11 @@ app.config['RECAPTCHA_SECRET_KEY'] = os.environ.get('RECAPTCHA_SECRET_KEY')
 # Initialize Database
 # Use mock database if ENV is set to 'local'
 if os.environ.get('ENV') == 'local':
+    from .mock_db import MockDatabase
     db_manager = MockDatabase()
     logging.info("Using Mock Database for local development.")
 else:
+    from .db import Database
     db_manager = Database()
     logging.info("Using Google Cloud Datastore.")
 
