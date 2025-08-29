@@ -1,6 +1,7 @@
 import datetime
 import logging
 import json
+import os
 from flask import render_template, redirect, url_for, flash, session, request
 from . import app, db_manager
 from .forms import RegistrationForm
@@ -13,13 +14,14 @@ def index():
     logging.debug(f"Request method: {request.method}")
 
     if request.method == 'POST':
-        token = request.form.get('g-recaptcha-response')
-        is_valid, score = verify_recaptcha(token, app.config['RECAPTCHA_SECRET_KEY'])
-        logging.debug(f"reCAPTCHA validation: is_valid={is_valid}, score={score}")
+        if os.environ.get('ENV') != 'local':
+            token = request.form.get('g-recaptcha-response')
+            is_valid, score = verify_recaptcha(token, app.config['RECAPTCHA_SECRET_KEY'])
+            logging.debug(f"reCAPTCHA validation: is_valid={is_valid}, score={score}")
 
-        if not is_valid:
-            flash('reCAPTCHA verification failed. Please try again.', 'danger')
-            return render_template('index.jinja2', form=form)
+            if not is_valid:
+                flash('reCAPTCHA verification failed. Please try again.', 'danger')
+                return render_template('index.jinja2', form=form)
 
         if form.validate():
             logging.debug("Form validation successful.")
@@ -56,7 +58,7 @@ def index():
     # Pass countries to the template as a JSON object
     countries_json = json.dumps([{'value': value, 'text': text} for value, text in COUNTRIES])
     
-    return render_template('index.jinja2', form=form, countries_json=countries_json)
+    return render_template('index.jinja2', form=form, countries_json=countries_json, env=os.environ.get('ENV'))
 
 @app.route('/success')
 def success():
