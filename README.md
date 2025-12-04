@@ -44,67 +44,50 @@ This is a simple Flask application that uses Google Cloud Firestore as a databas
 
 4.  **Install dependencies:**
 
-    With the virtual environment activated, install the required packages using `uv`:
+    With the virtual environment activated, install the project in editable mode:
 
     ```bash
-    uv pip install -r requirements.txt
+    uv pip install -e .
     ```
+    This command reads the dependencies from `pyproject.toml` and installs them.
 
 ## Running the Application
-    
-1.  **Set Google Cloud Credentials:**
 
-    This application requires Google Cloud credentials to connect to Firestore. You need to set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
+The application can be run in two modes:
 
-    *   **Linux/macOS:**
-        ```bash
-        export GOOGLE_APPLICATION_CREDENTIALS="local_key.json"
-        ```
+### 1. Local Development (with Mock Database)
 
-    *   **Windows (PowerShell):**
-        ```powershell
-        $env:GOOGLE_APPLICATION_CREDENTIALS="local_key.json"
-        ```
+For local development, you can use a mock in-memory database by setting the `ENV` environment variable. This avoids the need for Google Cloud credentials.
 
-    Replace `/path/to/your/local_key.json` with the actual path to your key file.
+*   **Run the Flask app:**
+    With the virtual environment activated, run the following command:
 
-2.  **Run the Flask app:**
-
-    You can run the application in two modes: **Local** (path-based routing) or **Production** (domain-based routing).
-
-    ### Local Mode (Recommended for Development)
-
-    Set `ENV=LOCAL` to enable path-based routing:
-    - Homepage: `http://localhost:8080/`
-    - Registration: `http://localhost:8080/reg`
-
-    *   **Linux/macOS:**
-        ```bash
-        export ENV=LOCAL
-        uv run flask run --host=0.0.0.0 --port=8080
-        ```
-    *   **Windows (PowerShell):**
-        ```powershell
-        $env:ENV="LOCAL"
-        uv run flask run --host=0.0.0.0 --port=8080
-        ```
-
-    ### Production Mode
-
-    If `ENV` is not set to `LOCAL`, the app uses domain-based routing:
-    - `winedentity.org` -> Homepage
-    - `reg.winedentity.org` -> Registration Form
-    - Other domains -> 404 Not Found
-
-    To run in this mode locally (requires modifying `hosts` file):
     ```bash
-    uv run flask run --host=0.0.0.0 --port=8080
+    ENV=local flask --app winedentity run
     ```
 
-## Testing
+    The application will be available at `http://127.0.0.1:5000`.
 
-To run the verification suite:
+### 2. Production Mode (with Google Cloud Firestore)
 
-```bash
-uv run python tests.py
-```
+To run the application against the real Google Cloud Firestore database, you need to provide credentials.
+
+*   **Set Google Cloud Credentials:**
+    Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
+
+    *   **Linux/macOS:**
+        ```bash
+        export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/local_key.json"
+        ```
+
+    *   **Windows (PowerShell):**
+        ```powershell
+        $env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\your\local_key.json"
+        ```
+
+*   **Run the Flask app:**
+    With the virtual environment activated and credentials set, run the application:
+
+    ```bash
+    flask --app winedentity run
+    ```

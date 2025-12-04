@@ -19,3 +19,10 @@ instance/
 
 # DANGER!
 local_key.json
+
+# Build artifacts
+winedentity_medlem.egg-info/
+.venv/
+
+# Logs
+app.log

@@ -1,48 +1,12 @@
-import os
 import datetime
 import logging
-import requests
 import json
-from flask import Flask, render_template, redirect, url_for, flash, session, request
-from forms import RegistrationForm
-from db import Database
-
-# Configure logging
-logging.basicConfig(level=logging.DEBUG)
-
-# Initialize Flask App
-app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('FLASK_SESSION_SECRET_KEY', 'a_hard_to_guess_string')
-app.config['RECAPTCHA_SITE_KEY'] = os.environ.get('RECAPTCHA_SITE_KEY')
-app.config['RECAPTCHA_SECRET_KEY'] = os.environ.get('RECAPTCHA_SECRET_KEY')
-
-# Initialize Database
-db_manager = Database()
-
-def verify_recaptcha(token):
-    """Verifies the reCAPTCHA token with Google."""
-    if not app.config['RECAPTCHA_SECRET_KEY']:
-        logging.warning("RECAPTCHA_SECRET_KEY is not set. Skipping verification.")
-        return True, 0.9  # Assume success for local development if not set
-
-    try:
-        response = requests.post(
-            'https://www.google.com/recaptcha/api/siteverify',
-            data={
-                'secret': app.config['RECAPTCHA_SECRET_KEY'],
-                'response': token
-            }
-        )
-        result = response.json()
-        logging.debug(f"reCAPTCHA verification result: {result}")
-        
-        if result.get('success') and result.get('score', 0.0) >= 0.5:
-            return True, result.get('score')
-        else:
-            return False, result.get('score')
-    except Exception as e:
-        logging.error(f"Error verifying reCAPTCHA: {e}")
-        return False, 0.0
+import os
+from flask import render_template, redirect, url_for, flash, session, request
+from . import app, db_manager
+from .forms import RegistrationForm
+from .utils import verify_recaptcha
+from .countries import COUNTRIES
 
 def home_view():
     return render_template('home.jinja2')
@@ -52,13 +16,20 @@ def register_view():
     logging.debug(f"Request method: {request.method}")
 
     if request.method == 'POST':
-        token = request.form.get('g-recaptcha-response')
-        is_valid, score = verify_recaptcha(token)
-        logging.debug(f"reCAPTCHA validation: is_valid={is_valid}, score={score}")
+        if os.environ.get('ENV') != 'local':
+            token = request.form.get('g-recaptcha-response')
+            is_valid, score = verify_recaptcha(token, app.config['RECAPTCHA_SECRET_KEY'])
+            logging.debug(f"reCAPTCHA validation: is_valid={is_valid}, score={score}")
 
+<<<<<<< HEAD:app.py
         if not is_valid:
             flash('reCAPTCHA verification failed. Please try again.', 'danger')
             return render_template('reg.jinja2', form=form)
+=======
+            if not is_valid:
+                flash('reCAPTCHA verification failed. Please try again.', 'danger')
+                return render_template('index.jinja2', form=form)
+>>>>>>> af26ce4a1ad4c3b7e3335a33b728bb8df7324fda:winedentity/main.py
 
         if form.validate():
             logging.debug("Form validation successful.")
@@ -93,15 +64,20 @@ def register_view():
             logging.debug(f"Form errors: {form.errors}")
 
     # Pass countries to the template as a JSON object
-    countries_json = json.dumps([{'value': value, 'text': text} for value, text in form.country.choices])
+    countries_json = json.dumps([{'value': value, 'text': text} for value, text in COUNTRIES])
     
+<<<<<<< HEAD:app.py
     return render_template('reg.jinja2', form=form, countries_json=countries_json)
+=======
+    return render_template('index.jinja2', form=form, countries_json=countries_json, env=os.environ.get('ENV'))
+>>>>>>> af26ce4a1ad4c3b7e3335a33b728bb8df7324fda:winedentity/main.py
 
 @app.route('/success')
 def success():
     membership_number = session.get('membership_number', 'N/A')
     full_name = session.get('full_name', 'Member')
     return render_template('success.jinja2', full_name=full_name, membership_number=membership_number)
+<<<<<<< HEAD:app.py
 
 # Routing Logic
 if os.environ.get('ENV') == 'LOCAL':
@@ -122,3 +98,5 @@ else:
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
+=======
+>>>>>>> af26ce4a1ad4c3b7e3335a33b728bb8df7324fda:winedentity/main.py
