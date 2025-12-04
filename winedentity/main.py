@@ -9,27 +9,22 @@ from .utils import verify_recaptcha
 from .countries import COUNTRIES
 
 def home_view():
-    return render_template('home.jinja2')
+    return render_template('home.jinja2', env=os.environ.get('ENV'))
 
 def register_view():
     form = RegistrationForm()
     logging.debug(f"Request method: {request.method}")
 
     if request.method == 'POST':
+        is_valid = True # Default to True for local dev
         if os.environ.get('ENV') != 'local':
             token = request.form.get('g-recaptcha-response')
             is_valid, score = verify_recaptcha(token, app.config['RECAPTCHA_SECRET_KEY'])
             logging.debug(f"reCAPTCHA validation: is_valid={is_valid}, score={score}")
 
-<<<<<<< HEAD:app.py
         if not is_valid:
             flash('reCAPTCHA verification failed. Please try again.', 'danger')
             return render_template('reg.jinja2', form=form)
-=======
-            if not is_valid:
-                flash('reCAPTCHA verification failed. Please try again.', 'danger')
-                return render_template('index.jinja2', form=form)
->>>>>>> af26ce4a1ad4c3b7e3335a33b728bb8df7324fda:winedentity/main.py
 
         if form.validate():
             logging.debug("Form validation successful.")
@@ -66,21 +61,16 @@ def register_view():
     # Pass countries to the template as a JSON object
     countries_json = json.dumps([{'value': value, 'text': text} for value, text in COUNTRIES])
     
-<<<<<<< HEAD:app.py
-    return render_template('reg.jinja2', form=form, countries_json=countries_json)
-=======
-    return render_template('index.jinja2', form=form, countries_json=countries_json, env=os.environ.get('ENV'))
->>>>>>> af26ce4a1ad4c3b7e3335a33b728bb8df7324fda:winedentity/main.py
+    return render_template('reg.jinja2', form=form, countries_json=countries_json, env=os.environ.get('ENV'))
 
 @app.route('/success')
 def success():
     membership_number = session.get('membership_number', 'N/A')
     full_name = session.get('full_name', 'Member')
     return render_template('success.jinja2', full_name=full_name, membership_number=membership_number)
-<<<<<<< HEAD:app.py
 
 # Routing Logic
-if os.environ.get('ENV') == 'LOCAL':
+if os.environ.get('ENV') == 'local':
     app.add_url_rule('/', view_func=home_view)
     app.add_url_rule('/reg', view_func=register_view, methods=['GET', 'POST'])
 else:
@@ -95,8 +85,3 @@ else:
             return register_view()
         else:
             return "Not Found", 404
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
-=======
->>>>>>> af26ce4a1ad4c3b7e3335a33b728bb8df7324fda:winedentity/main.py

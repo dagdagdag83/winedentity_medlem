@@ -7,7 +7,11 @@ import importlib
 # Mock db module before importing app
 sys.modules['db'] = MagicMock()
 
-import app
+# We need to mock winedentity.db and winedentity.mock_db because __init__ imports them
+sys.modules['winedentity.db'] = MagicMock()
+sys.modules['winedentity.mock_db'] = MagicMock()
+
+import winedentity
 
 class TestWinedentity(unittest.TestCase):
     def setUp(self):
@@ -15,10 +19,13 @@ class TestWinedentity(unittest.TestCase):
 
     def test_local_mode(self):
         """Test LOCAL mode routing"""
-        # Set ENV to LOCAL and reload app
-        os.environ['ENV'] = 'LOCAL'
-        importlib.reload(app)
-        client = app.app.test_client()
+        # Set ENV to local and reload app
+        os.environ['ENV'] = 'local'
+        importlib.reload(winedentity)
+        # Reload main to re-register routes
+        importlib.reload(winedentity.main)
+        
+        client = winedentity.app.test_client()
         
         # Test Homepage
         resp = client.get('/')
@@ -35,8 +42,10 @@ class TestWinedentity(unittest.TestCase):
         # Unset ENV and reload app
         if 'ENV' in os.environ:
             del os.environ['ENV']
-        importlib.reload(app)
-        client = app.app.test_client()
+        importlib.reload(winedentity)
+        importlib.reload(winedentity.main)
+        
+        client = winedentity.app.test_client()
 
         # Test Homepage (winedentity.org)
         resp = client.get('/', headers={'Host': 'winedentity.org'})
