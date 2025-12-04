@@ -79,7 +79,7 @@ else:
         host = request.host.split(':')[0]
         logging.debug(f"Dispatching for host: {host}")
         
-        if host == 'winedentity.org':
+        if host == 'winedentity.org' or host == 'www.winedentity.org':
             return home_view()
         elif host == 'reg.winedentity.org':
             return register_view()

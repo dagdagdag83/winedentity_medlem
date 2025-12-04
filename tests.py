@@ -52,6 +52,11 @@ class TestWinedentity(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIn(b'Mer informasjon kommer snart!', resp.data)
 
+        # Test Homepage (www.winedentity.org)
+        resp = client.get('/', headers={'Host': 'www.winedentity.org'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b'Mer informasjon kommer snart!', resp.data)
+
         # Test Registration (reg.winedentity.org)
         resp = client.get('/', headers={'Host': 'reg.winedentity.org'})
         self.assertEqual(resp.status_code, 200)
