@@ -44,8 +44,10 @@ def verify_recaptcha(token):
         logging.error(f"Error verifying reCAPTCHA: {e}")
         return False, 0.0
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+def home_view():
+    return render_template('home.jinja2')
+
+def register_view():
     form = RegistrationForm()
     logging.debug(f"Request method: {request.method}")
 
@@ -56,7 +58,7 @@ def index():
 
         if not is_valid:
             flash('reCAPTCHA verification failed. Please try again.', 'danger')
-            return render_template('index.jinja2', form=form)
+            return render_template('reg.jinja2', form=form)
 
         if form.validate():
             logging.debug("Form validation successful.")
@@ -93,13 +95,30 @@ def index():
     # Pass countries to the template as a JSON object
     countries_json = json.dumps([{'value': value, 'text': text} for value, text in form.country.choices])
     
-    return render_template('index.jinja2', form=form, countries_json=countries_json)
+    return render_template('reg.jinja2', form=form, countries_json=countries_json)
 
 @app.route('/success')
 def success():
     membership_number = session.get('membership_number', 'N/A')
     full_name = session.get('full_name', 'Member')
     return render_template('success.jinja2', full_name=full_name, membership_number=membership_number)
+
+# Routing Logic
+if os.environ.get('ENV') == 'LOCAL':
+    app.add_url_rule('/', view_func=home_view)
+    app.add_url_rule('/reg', view_func=register_view, methods=['GET', 'POST'])
+else:
+    @app.route('/', methods=['GET', 'POST'])
+    def dispatch():
+        host = request.host.split(':')[0]
+        logging.debug(f"Dispatching for host: {host}")
+        
+        if host == 'winedentity.org':
+            return home_view()
+        elif host == 'reg.winedentity.org':
+            return register_view()
+        else:
+            return "Not Found", 404
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

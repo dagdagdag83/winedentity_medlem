@@ -51,7 +51,7 @@ This is a simple Flask application that uses Google Cloud Firestore as a databas
     ```
 
 ## Running the Application
-
+    
 1.  **Set Google Cloud Credentials:**
 
     This application requires Google Cloud credentials to connect to Firestore. You need to set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
@@ -70,10 +70,41 @@ This is a simple Flask application that uses Google Cloud Firestore as a databas
 
 2.  **Run the Flask app:**
 
-    With the virtual environment activated and the environment variable set, you can run the application:
+    You can run the application in two modes: **Local** (path-based routing) or **Production** (domain-based routing).
 
+    ### Local Mode (Recommended for Development)
+
+    Set `ENV=LOCAL` to enable path-based routing:
+    - Homepage: `http://localhost:8080/`
+    - Registration: `http://localhost:8080/reg`
+
+    *   **Linux/macOS:**
+        ```bash
+        export ENV=LOCAL
+        uv run flask run --host=0.0.0.0 --port=8080
+        ```
+    *   **Windows (PowerShell):**
+        ```powershell
+        $env:ENV="LOCAL"
+        uv run flask run --host=0.0.0.0 --port=8080
+        ```
+
+    ### Production Mode
+
+    If `ENV` is not set to `LOCAL`, the app uses domain-based routing:
+    - `winedentity.org` -> Homepage
+    - `reg.winedentity.org` -> Registration Form
+    - Other domains -> 404 Not Found
+
+    To run in this mode locally (requires modifying `hosts` file):
     ```bash
-    flask run
+    uv run flask run --host=0.0.0.0 --port=8080
     ```
 
-    The application will be available at `http://127.0.0.1:5000`.
+## Testing
+
+To run the verification suite:
+
+```bash
+uv run python tests.py
+```

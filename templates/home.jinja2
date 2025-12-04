@@ -1,0 +1,26 @@
+{% extends "base.jinja2" %}
+
+{% block title %}Foreningen Winedentity{% endblock %}
+
+{% block content %}
+<div class="p-2 text-center">
+    <h1 class="text-3xl font-bold text-[#741b79] mb-4">Foreningen Winedentity</h1>
+    <div class="text-gray-600 mb-6">
+        <p class="mb-4">
+            Velkommen til Foreningen Winedentity.
+        </p>
+        <p class="flex flex-col items-center">
+            <img src="{{ url_for('static', filename='under_construction.png') }}" alt="Under Construction Logo"
+                class="w-64 h-auto mb-4">
+            Mer informasjon kommer snart!
+        </p>
+    </div>
+
+    <div class="space-y-4">
+        <a href="http://reg.winedentity.org"
+            class="no-underline inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#741b79] hover:bg-[#5f1563] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#fbbd19]">
+            Bli medlem!
+        </a>
+    </div>
+</div>
+{% endblock %}
