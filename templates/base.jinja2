@@ -31,7 +31,7 @@
           </a>
 
           <!-- Navigation Links -->
-          <ul class="flex space-x-6 text-sm font-medium text-[#f3e5ab]">
+          <ul class="hidden md:flex space-x-6 text-sm font-medium text-[#f3e5ab]">
             <li><a href="/#about"
                 class="hover:text-[#d4af37] transition-colors relative group font-['Cinzel'] tracking-wide">
                 Om oss
@@ -46,7 +46,7 @@
 
           <!-- CTA Button -->
           <a href="{% if env == 'local' %}/reg{% else %}http://reg.winedentity.org{% endif %}"
-            class="hidden md:inline-flex px-6 py-2 bg-gradient-to-b from-[#e6c975] to-[#b38728] text-[#2a0845] rounded-sm text-xs font-bold hover:shadow-[0_0_15px_rgba(212,175,55,0.6)] transition-all font-['Cinzel'] tracking-wider border border-[#fcf6ba] hover:scale-105">
+            class="inline-flex px-6 py-2 bg-gradient-to-b from-[#e6c975] to-[#b38728] text-[#2a0845] rounded-sm text-xs font-bold hover:shadow-[0_0_15px_rgba(212,175,55,0.6)] transition-all font-['Cinzel'] tracking-wider border border-[#fcf6ba] hover:scale-105">
             Bli medlem
           </a>
         </div>
