@@ -5,28 +5,152 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
-  <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
   <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
-<body class="bg-white">
+<body class="bg-purple-50">
   <div class="mt-2 px-4">
-    <div class="max-w-4xl w-full mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-      <div class="h-40 bg-cover bg-center"
-        style="background-image: url('{{ url_for('static', filename='header_2_smaller.jpg') }}');"></div>
-      <main class="px-6 pb-6">
+    <div class="max-w-4xl w-full mx-auto bg-white rounded-lg shadow-md overflow-hidden flex flex-col min-h-screen">
+      <header>
+        <div class="h-40 bg-cover bg-center border-b-4 border-[#d4af37] shadow-md"
+          style="background-image: url('{{ url_for('static', filename='header_2_smaller.jpg') }}');"></div>
+      </header>
+
+      {% block navbar %}
+      <nav class="bg-[#2a0845]/95 backdrop-blur-md border-b-2 border-[#d4af37] sticky top-0 z-50 shadow-lg">
+        <div class="max-w-4xl mx-auto px-6">
+          <div class="flex items-center justify-between h-16">
+            <!-- Logo/Home Link -->
+            <a href="/"
+              class="font-bold text-[#d4af37] text-xl tracking-wider hover:text-white transition-colors font-['Cinzel'] flex items-center gap-2">
+              <span>⚜️</span> Winedentity
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="flex space-x-6 text-sm font-medium text-[#f3e5ab]">
+              <li><a href="/#about"
+                  class="hover:text-[#d4af37] transition-colors relative group font-['Cinzel'] tracking-wide">
+                  Om oss
+                  <span
+                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#d4af37] transition-all group-hover:w-full"></span>
+                </a></li>
+              <li><a href="/#membership"
+                  class="hover:text-[#d4af37] transition-colors relative group font-['Cinzel'] tracking-wide">
+                  Medlemskap
+                  <span
+                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#d4af37] transition-all group-hover:w-full"></span>
+                </a></li>
+            </ul>
+
+            <!-- CTA Button -->
+            <a href="/#join"
+              class="hidden md:inline-flex px-6 py-2 bg-gradient-to-b from-[#e6c975] to-[#b38728] text-[#2a0845] rounded-sm text-xs font-bold hover:shadow-[0_0_15px_rgba(212,175,55,0.6)] transition-all font-['Cinzel'] tracking-wider border border-[#fcf6ba] hover:scale-105">
+              Bli medlem
+            </a>
+          </div>
+        </div>
+      </nav>
+      {% endblock %}
+
+      <main class="flex-grow px-6 pb-6 pt-10">
         {% block content %}{% endblock %}
       </main>
+
+      {% block footer %}
+      <!-- Footer -->
+      <footer
+        class="mt-12 bg-[#2a0845] border-t-4 border-[#d4af37] text-[#f3e5ab] py-4 shadow-lg relative overflow-hidden -mx-6 -mb-6">
+        <!-- Background Texture -->
+        <div
+          class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] pointer-events-none">
+        </div>
+
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-4 px-6 md:px-12">
+
+          <!-- Org Details -->
+          <div class="text-center md:text-left">
+            <p class="font-['Cinzel'] font-bold text-base text-[#d4af37] mb-1">Foreningen Winedentity</p>
+            <p class="text-xs opacity-80">
+              Org.nr: 935 821 894 <span class="mx-2 text-[#d4af37]">|</span>
+              <a href="https://virksomhet.brreg.no/nb/oppslag/enheter/935821894" target="_blank"
+                class="hover:text-[#d4af37] underline decoration-[#d4af37]/50 hover:decoration-[#d4af37] transition-all">
+                Registrert i Frivillighetsregisteret
+              </a>
+            </p>
+          </div>
+
+          <!-- Scroll Top Button -->
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="group flex flex-col items-center justify-center w-10 h-10 rounded-full border-2 border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#2a0845] transition-all duration-300 shadow-md"
+            title="Til toppen">
+            <!-- Arrow Icon (Default) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 block group-hover:hidden transition-all" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            <!-- Fleur Icon (Hover) -->
+            <span class="hidden group-hover:block text-xl transition-all">⚜️</span>
+          </button>
+        </div>
+
+        <div class="mt-2 text-center text-[10px] opacity-40 font-serif italic">
+          All rights reserved in vino veritas.
+        </div>
+      </footer>
+      {% endblock %}
     </div>
   </div>
   <script src="https://www.google.com/recaptcha/api.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js" defer></script>
-  {% block scripts %}{% endblock %}
+
+  {% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('nav ul a');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // Adjusted to trigger better on scroll
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+              // Reset to default inactive style 
+              link.classList.remove('text-white', 'drop-shadow-md', 'font-bold', 'underline', 'decoration-[#d4af37]', 'decoration-2', 'underline-offset-4');
+              link.classList.add('text-[#f3e5ab]');
+
+              // Check if href matches /#id or #id
+              const href = link.getAttribute('href');
+              if (href === `#${id}` || href === `/#${id}`) {
+                // Active State
+                link.classList.remove('text-[#f3e5ab]');
+                link.classList.add('text-white', 'drop-shadow-md', 'font-bold', 'underline', 'decoration-[#d4af37]', 'decoration-2', 'underline-offset-4');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      if (sections.length > 0) {
+        sections.forEach(section => {
+          observer.observe(section);
+        });
+      }
+    });
+  </script>
+  {% endblock %}
 </body>
 
 </html>
