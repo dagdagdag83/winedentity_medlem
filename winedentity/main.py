@@ -8,6 +8,10 @@ from .forms import RegistrationForm
 from .utils import verify_recaptcha
 from .countries import COUNTRIES
 
+@app.context_processor
+def inject_env():
+    return dict(env=os.environ.get('ENV'))
+
 def home_view():
     return render_template('home.jinja2', env=os.environ.get('ENV'))
 
