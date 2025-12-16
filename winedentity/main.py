@@ -15,6 +15,9 @@ def inject_env():
 def home_view():
     return render_template('home.jinja2', env=os.environ.get('ENV'))
 
+def partner_view():
+    return render_template('partner.jinja2', env=os.environ.get('ENV'))
+
 def register_view():
     form = RegistrationForm()
     logging.debug(f"Request method: {request.method}")
@@ -76,8 +79,11 @@ def success():
 # Routing Logic
 if os.environ.get('ENV') == 'local':
     app.add_url_rule('/', view_func=home_view)
+    app.add_url_rule('/partner', view_func=partner_view)
     app.add_url_rule('/reg', view_func=register_view, methods=['GET', 'POST'])
 else:
+    app.add_url_rule('/partner', view_func=partner_view)
+    
     @app.route('/', methods=['GET', 'POST'])
     def dispatch():
         host = request.host.split(':')[0]

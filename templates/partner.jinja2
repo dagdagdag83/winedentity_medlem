@@ -1,0 +1,276 @@
+{% extends "base.jinja2" %}
+
+{% block title %}Støttespiller & Partner - Foreningen Winedentity{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-12 print-content">
+
+    <!-- Header Section -->
+    <header class="text-center space-y-6 max-w-2xl mx-auto print:space-y-4 print:mb-8">
+        <h1
+            class="text-4xl md:text-5xl font-extrabold tracking-tight font-['Cinzel'] text-brand-purple-dark print:text-5xl">
+            PARTNERPROSPEKT
+        </h1>
+        <div class="h-1 w-24 bg-brand-gold mx-auto print:bg-brand-gold print:h-1.5"></div>
+        <h2
+            class="text-2xl md:text-3xl font-bold font-['Cinzel'] text-[#2a0845] print:text-2xl print:text-brand-purple-dark">
+            Digital identitet møter god vin
+        </h2>
+        <p class="text-xl text-gray-700 leading-relaxed font-serif italic print:text-lg print:text-black">
+            Vi inviterer dere til å bli med i et unikt fellesskap.
+        </p>
+    </header>
+
+    <!-- Intro Section -->
+    <section class="prose prose-lg mx-auto text-gray-700 print:text-black print:max-w-none">
+        <div
+            class="bg-brand-purple/5 p-8 rounded-lg border border-brand-purple/20 print:bg-brand-purple/5 print:border-brand-purple/20 print:p-6 print:mb-8">
+            <h3 class="font-bold text-brand-purple-dark text-xl font-['Cinzel'] mb-4 print:text-brand-purple-dark">En
+                unik krysning</h3>
+            <p class="mb-4">
+                Winedentity er ikke bare et fagforum, og det er heller ikke en vinklubb. Vi er den eneste
+                møteplassen som
+                kombinerer <strong>digital identitet</strong> og <strong>vin</strong> med like stor faglig tyngde og
+                lidenskap.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 print:grid-cols-2 print:gap-8">
+                <div class="flex items-start space-x-4">
+                    <div
+                        class="text-3xl bg-white p-3 rounded-full shadow-sm print:bg-white print:border print:border-gray-200">
+                        🔐</div>
+                    <div>
+                        <h4 class="font-bold text-brand-purple-dark">1. Teknologien</h4>
+                        <p class="text-sm">Dype diskusjoner om identitet, sikkerhet og personvern.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div
+                        class="text-3xl bg-white p-3 rounded-full shadow-sm print:bg-white print:border print:border-gray-200">
+                        🍷</div>
+                    <div>
+                        <h4 class="font-bold text-brand-purple-dark">2. Vinen</h4>
+                        <p class="text-sm">Håndplukket vinmenyer presentert med kunnskap.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="print:text-sm">
+                Vi tiltrekker oss deltakere som stiller like høye krav til sikkerhetsarkitektur som de gjør til
+                innholdet i
+                glasset. Det er ofte ventelister for å delta, da vi prioriterer en intim ramme for gode samtaler.
+            </p>
+        </div>
+
+        <div class="mt-8 print:mt-6 print:mb-8">
+            <h3 class="font-bold text-brand-purple-dark text-xl font-['Cinzel'] mb-2">Hvem treffer dere?</h3>
+            <p>
+                Ved å støtte oss treffer dere en dedikert gruppe med eksperter, ledere, beslutningstakere og entusiaster
+                i en
+                setting preget
+                av "koselig" profesjonalitet. Dere profileres overfor en målgruppe som verdsetter kvalitet – enten det
+                er snakk
+                om kode eller årgang.
+            </p>
+        </div>
+    </section>
+
+    <!-- Partnership Tiers -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 print:grid-cols-2 print:gap-6 print:mb-8">
+
+        <!-- Tier 1 -->
+        <div
+            class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden border-2 border-brand-gold/30 hover:border-brand-gold transition-all duration-300 print:shadow-none print:border-2 print:border-brand-gold/30 print:break-inside-avoid">
+            <div
+                class="bg-brand-purple-dark text-white p-6 text-center print:bg-brand-purple-dark print:text-white print:-webkit-print-color-adjust-exact">
+                <h3 class="text-xl font-bold font-['Cinzel'] uppercase tracking-wider">Event Partner</h3>
+                <p class="text-brand-gold text-sm mt-1">Enkeltarrangement</p>
+            </div>
+            <div class="p-8 flex-grow flex flex-col justify-between print:p-6">
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-600 text-sm italic">Passer for dere som ønsker synlighet rundt et spesifikt tema
+                        eller en konkret kveld.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-brand-gold mr-2">✓</span>
+                            <span><strong>Garantert plass:</strong> 2 biletter inkludert</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-gold mr-2">✓</span>
+                            <span><strong>Synlighet:</strong> Logo på invitasjon/eventside, muntlig takk</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-gold mr-2">✓</span>
+                            <span><strong>Branding:</strong> Profilering som støttespiller</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-center pt-6 border-t border-gray-100">
+                    <span class="block text-3xl font-bold text-brand-purple-dark mb-1">12.500 NOK</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest">Per event (Eks. MVA)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier 2 -->
+        <div
+            class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden border-2 border-brand-gold/30 hover:border-brand-gold transition-all duration-300 print:shadow-none print:border-2 print:border-brand-gold/30 print:break-inside-avoid">
+            <div
+                class="bg-brand-purple-dark text-white p-6 text-center print:bg-brand-purple-dark print:text-white print:-webkit-print-color-adjust-exact">
+                <h3 class="text-xl font-bold font-['Cinzel'] uppercase tracking-wider">Samarbeidspartner</h3>
+                <p class="text-brand-gold text-sm mt-1">Årlig engasjement</p>
+            </div>
+            <div class="p-8 flex-grow flex flex-col justify-between print:p-6">
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-600 text-sm italic">For aktører som ønsker en tydeligere posisjon og et dypere
+                        samarbeid med foreningen.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-brand-gold mr-2">✓</span>
+                            <span><strong>Fast plass:</strong> 2 biletter til alle eventer</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-gold mr-2">✓</span>
+                            <span><strong>Langsiktig synlighet:</strong> Profilering på alle eventer</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-gold mr-2">✓</span>
+                            <span><strong>Fast profilering:</strong> Logo på nettsiden hele året</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-center pt-6 border-t border-gray-100">
+                    <span class="block text-3xl font-bold text-brand-purple-dark mb-1">50.000 NOK</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest">Per år (Eks. MVA)</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CTA / Contact -->
+    <section
+        class="bg-brand-purple-dark text-brand-gold-light rounded-xl p-8 md:p-12 text-center relative overflow-hidden print:bg-brand-purple-dark print:text-brand-gold-light print:-webkit-print-color-adjust-exact print:p-6 print:rounded-lg">
+        <!-- Texture Overlay -->
+        <div
+            class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] pointer-events-none">
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center">
+            <h3 class="text-2xl md:text-3xl font-bold font-['Cinzel'] mb-8 text-brand-gold">Vil dere være med på laget?
+            </h3>
+
+            <!-- Email Card -->
+            <a href="mailto:hei@winedentity.org"
+                class="group flex items-center gap-4 bg-white/5 hover:bg-white/10 border border-brand-gold/30 hover:border-brand-gold px-8 py-4 rounded-lg transition-all duration-300 print:border-none print:p-0 print:bg-transparent">
+                <span
+                    class="text-3xl bg-brand-gold/20 p-2 rounded-full group-hover:bg-brand-gold/40 transition-colors print:hidden">✉️</span>
+                <div class="text-left">
+                    <div class="text-xs text-brand-gold uppercase tracking-wider mb-1 print:hidden">Send oss en e-post
+                    </div>
+                    <div
+                        class="font-bold text-white text-lg group-hover:text-brand-gold transition-colors print:text-black">
+                        hei@winedentity.org</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+</div>
+
+<style>
+    @media print {
+        @page {
+            margin: 1.5cm;
+            size: A4;
+        }
+
+        /* Graphic styling enablement */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* Hide Site Header (Image + Nav) and Footer */
+        body>header,
+        footer,
+        .no-print {
+            display: none !important;
+        }
+
+        /* Reset background but allow specific colored sections */
+        html,
+        body {
+            background: white !important;
+            color: black;
+            font-size: 11pt;
+            /* Slightly smaller for density */
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            min-height: auto !important;
+            width: 100% !important;
+            max-width: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* Reset Main container */
+        main {
+            display: block !important;
+            padding-top: 2rem !important;
+            /* Reduce from pt-10 */
+            padding-bottom: 0 !important;
+            flex-grow: 0 !important;
+        }
+
+
+
+        /* Clean URL artifacts */
+        a[href]:after {
+            content: none !important;
+        }
+
+        /* Ensure layout grid works */
+        .grid {
+            display: grid !important;
+        }
+
+        /* Remove web-specific interaction styles */
+        .shadow-lg,
+        .shadow-xl {
+            box-shadow: none !important;
+        }
+
+        .transform {
+            transform: none !important;
+        }
+
+        .bg-brand-purple-dark {
+            background-color: #62246d !important;
+            color: white !important;
+        }
+
+        .text-brand-purple-dark {
+            color: #62246d !important;
+        }
+
+        .bg-brand-gold {
+            background-color: #ecc247 !important;
+        }
+
+        /* Ensure good breaks */
+        h1,
+        h2,
+        h3 {
+            page-break-after: avoid;
+        }
+
+        section,
+        div {
+            page-break-inside: avoid;
+        }
+    }
+</style>
+{% endblock %}
