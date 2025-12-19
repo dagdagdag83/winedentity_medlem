@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smakekort - Foreningen Winedentity 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --brand-purple: #4a1d96;
+            --brand-gold: #c5a028;
+            --bg-offwhite: #fdfdfd;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .text-gold {
+            color: var(--brand-gold);
+        }
+
+        .text-purple {
+            color: var(--brand-purple);
+        }
+
+        .bg-purple {
+            background-color: var(--brand-purple);
+        }
+
+        .border-gold {
+            border-color: var(--brand-gold);
+        }
+
+        /* Paper texture effect for screen */
+        .card {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid var(--brand-gold);
+        }
+
+        /* Print Specifics */
+        @media print {
+            body {
+                background-color: white;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                border-top: 4px solid var(--brand-gold) !important;
+                break-inside: avoid;
+                /* Prevent card from splitting across pages */
+                margin-bottom: 2cm;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            /* Ensure lines for notes print clearly */
+            .note-line {
+                border-bottom: 1px solid #ccc !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="pb-20">
+
+    <!-- Control Panel (Hidden on Print) -->
+    <div class="no-print fixed bottom-6 right-6 z-50">
+        <button onclick="window.print()"
+            class="bg-purple text-white px-6 py-3 rounded-full shadow-lg font-bold hover:bg-purple-900 transition flex items-center gap-2 border-2 border-yellow-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Skriv ut / Lag PDF
+        </button>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-4xl mx-auto p-8 print:p-0">
+
+        <!-- Header -->
+        <header class="text-center mb-12 border-b-2 border-gold pb-8">
+            <div class="uppercase tracking-widest text-sm text-gray-500 mb-2">Foreningen Winedentity</div>
+            <h1 class="text-5xl text-purple font-bold mb-2">Årsmøte 2025</h1>
+            <p class="text-xl serif italic text-gold">Smakskart & Meny</p>
+        </header>
+
+        <!-- Wine 1 -->
+        <article class="card p-8 mb-8 relative rounded-sm">
+            <div
+                class="absolute top-0 right-0 bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 uppercase tracking-wide rounded-bl-lg border-b border-l border-yellow-200">
+                Magnum (1.5L)</div>
+
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-4 border-b border-gray-100 pb-4">
+                <h2 class="text-3xl text-purple serif font-bold">1. Pierre Gimonnet Fleuron</h2>
+                <span class="text-lg font-bold text-gray-600">Blanc de Blancs Brut 2016</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm">
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Område / Type</span>
+                    Côte des Blancs, Vintage Champagne
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Drue</span>
+                    100% Chardonnay
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Pris</span>
+                    1 699,90 kr
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="serif text-purple text-lg border-b border-purple/20 mb-2 pb-1">Om Vinen</h3>
+                    <p class="text-gray-700 mb-3 text-sm leading-relaxed">
+                        En referanseprodusent og mester på "Grower Champagne". Kjent for ekstrem presisjon, renhet og
+                        eleganse.
+                    </p>
+                    <p class="text-gray-700 italic text-sm">
+                        <strong class="not-italic text-purple">I glasset:</strong> Duft av sitrus, epler, hvite blomster
+                        og kalkaktig mineralitet. Magnumflasken gir en ferskere utvikling.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded border border-gray-100 print:bg-transparent print:border-gray-200">
+                    <h3 class="serif text-purple text-lg mb-2">Matfølge</h3>
+                    <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+                        <li>Kremete oster (Brillat-Savarin, Brie)</li>
+                        <li>Tynne skiver mild spekeskinke</li>
+                        <li>Trøffelsalami</li>
+                    </ul>
+                    <p class="text-xs text-gray-500 mt-2 italic">Saltet i skinken fremhever frukten.</p>
+                </div>
+            </div>
+
+            <!-- Notes Section -->
+            <div class="mt-8 pt-4">
+                <p class="uppercase text-xs font-bold text-gray-400 mb-1">Mine Notater</p>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+            </div>
+
+            <!-- Rating Circles -->
+            <div class="flex justify-end mt-4 gap-2 items-center">
+                <span class="text-xs uppercase font-bold text-gray-400 mr-2">Poeng:</span>
+                <div class="flex gap-1">
+                    <div class="w-6 h-6 rounded-full border border-gray-300"></div>
+                    <div class="w-6 h-6 rounded-full border border-gray-300"></div>
+                    <div class="text-xl leading-none">/ 100</div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Wine 2 -->
+        <article class="card p-8 mb-8 rounded-sm">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-4 border-b border-gray-100 pb-4">
+                <h2 class="text-3xl text-purple serif font-bold">2. Ronco del Gnemiz</h2>
+                <span class="text-lg font-bold text-gray-600">"Corrado di Manzano" 2020</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm">
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Område</span>
+                    Friuli, Italia
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Drue</span>
+                    Chardonnay
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Pris</span>
+                    505,50 kr
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="serif text-purple text-lg border-b border-purple/20 mb-2 pb-1">Om Vinen</h3>
+                    <p class="text-gray-700 mb-3 text-sm leading-relaxed">
+                        En "kultprodusent" i Rosazzo-høydene. Svært lave utbytter gir rike, konsentrerte viner bygget
+                        for lagring.
+                    </p>
+                    <p class="text-gray-700 italic text-sm">
+                        <strong class="not-italic text-purple">I glasset:</strong> Kraftig og teksturert. Moden gul
+                        frukt, smør, ristede nøtter og tydelig eikepreg. Frisk syre.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded border border-gray-100 print:bg-transparent print:border-gray-200">
+                    <h3 class="serif text-purple text-lg mb-2">Matfølge</h3>
+                    <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+                        <li>San Daniele-skinke (Regional match!)</li>
+                        <li>Lagret parmesan</li>
+                        <li>Lardo eller Comté</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4">
+                <p class="uppercase text-xs font-bold text-gray-400 mb-1">Mine Notater</p>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+            </div>
+            <div class="flex justify-end mt-4 gap-2 items-center">
+                <span class="text-xs uppercase font-bold text-gray-400 mr-2">Poeng:</span>
+                <div class="w-16 h-8 border-b border-gray-400"></div>
+            </div>
+        </article>
+
+        <!-- Wine 3 -->
+        <article class="card p-8 mb-8 rounded-sm">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-4 border-b border-gray-100 pb-4">
+                <h2 class="text-3xl text-purple serif font-bold">3. Bernard Gripa</h2>
+                <span class="text-lg font-bold text-gray-600">Saint-Joseph "Le Berceau" Blanc</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm">
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Område</span>
+                    Nord-Rhône, Frankrike
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Drue</span>
+                    100% Marsanne
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Pris</span>
+                    659,70 kr
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="serif text-purple text-lg border-b border-purple/20 mb-2 pb-1">Om Vinen</h3>
+                    <p class="text-gray-700 mb-3 text-sm leading-relaxed">
+                        Druer fra nesten 100 år gamle vinstokker. Gir enorm dybde og konsentrasjon.
+                    </p>
+                    <p class="text-gray-700 italic text-sm">
+                        <strong class="not-italic text-purple">I glasset:</strong> Stor, fyldig og nesten "oljete".
+                        Aromaer av aprikos, honning, bivoks og hvite blomster. Saltaktig finish.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded border border-gray-100 print:bg-transparent print:border-gray-200">
+                    <h3 class="serif text-purple text-lg mb-2">Matfølge</h3>
+                    <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+                        <li>Rillettes eller grov landpaté</li>
+                        <li>Moden Gruyère</li>
+                        <li>Spekepølse med fennikel</li>
+                    </ul>
+                    <p class="text-xs text-gray-500 mt-2 italic">Vinen takler fettet i patéen utmerket.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4">
+                <p class="uppercase text-xs font-bold text-gray-400 mb-1">Mine Notater</p>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+            </div>
+            <div class="flex justify-end mt-4 gap-2 items-center">
+                <span class="text-xs uppercase font-bold text-gray-400 mr-2">Poeng:</span>
+                <div class="w-16 h-8 border-b border-gray-400"></div>
+            </div>
+        </article>
+
+        <!-- Wine 4 -->
+        <article class="card p-8 mb-8 rounded-sm">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-4 border-b border-gray-100 pb-4">
+                <h2 class="text-3xl text-purple serif font-bold">4. Thymiopoulos Kayafas</h2>
+                <span class="text-lg font-bold text-gray-600">2022</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm">
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Område</span>
+                    Naoussa, Hellas
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Drue</span>
+                    Xinomavro
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Pris</span>
+                    690,10 kr
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="serif text-purple text-lg border-b border-purple/20 mb-2 pb-1">Om Vinen</h3>
+                    <p class="text-gray-700 mb-3 text-sm leading-relaxed">
+                        Fra superstjernen som moderniserte gresk vin. Biodynamisk. Fremhever eleganse og frukt fremfor
+                        det rustikke.
+                    </p>
+                    <p class="text-gray-700 italic text-sm">
+                        <strong class="not-italic text-purple">I glasset:</strong> "Hellas' Barolo". Elegant, fast
+                        rødvin. Soltørket tomat, røde bær, urter og oliven. Tydelige tanniner.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded border border-gray-100 print:bg-transparent print:border-gray-200">
+                    <h3 class="serif text-purple text-lg mb-2">Matfølge</h3>
+                    <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+                        <li>Store grønne oliven (Perfekt!)</li>
+                        <li>Fetaost med god olivenolje</li>
+                        <li>Krydret salami / lammepølse</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4">
+                <p class="uppercase text-xs font-bold text-gray-400 mb-1">Mine Notater</p>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+            </div>
+            <div class="flex justify-end mt-4 gap-2 items-center">
+                <span class="text-xs uppercase font-bold text-gray-400 mr-2">Poeng:</span>
+                <div class="w-16 h-8 border-b border-gray-400"></div>
+            </div>
+        </article>
+
+        <!-- Wine 5 -->
+        <article class="card p-8 mb-8 rounded-sm">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-4 border-b border-gray-100 pb-4">
+                <h2 class="text-3xl text-purple serif font-bold">5. Remoissenet Beaune 1er Cru</h2>
+                <span class="text-lg font-bold text-gray-600">"Les Bressandes"</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm">
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Område</span>
+                    Burgund, Frankrike
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Drue</span>
+                    Pinot Noir
+                </div>
+                <div>
+                    <span class="block text-gold font-bold uppercase text-xs">Pris</span>
+                    719,90 kr
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="serif text-purple text-lg border-b border-purple/20 mb-2 pb-1">Om Vinen</h3>
+                    <p class="text-gray-700 mb-3 text-sm leading-relaxed">
+                        Historisk handelshus med enormt bibliotek. Fokus på presisjon og klassisk burgunder-stil.
+                    </p>
+                    <p class="text-gray-700 italic text-sm">
+                        <strong class="not-italic text-purple">I glasset:</strong> Sjarmerende og "kjøttfull". Jordbær,
+                        moreller, skogbunn og krydder. Kraft og silkeaktig munnfølelse.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded border border-gray-100 print:bg-transparent print:border-gray-200">
+                    <h3 class="serif text-purple text-lg mb-2">Matfølge</h3>
+                    <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+                        <li>Terrine/paté</li>
+                        <li>Milde oster (Morbier, Reblochon)</li>
+                        <li>God Bayonne-skinke</li>
+                    </ul>
+                    <p class="text-xs text-gray-500 mt-2 italic">Unngå chili, la frukten skinne.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4">
+                <p class="uppercase text-xs font-bold text-gray-400 mb-1">Mine Notater</p>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+                <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+            </div>
+            <div class="flex justify-end mt-4 gap-2 items-center">
+                <span class="text-xs uppercase font-bold text-gray-400 mr-2">Poeng:</span>
+                <div class="w-16 h-8 border-b border-gray-400"></div>
+            </div>
+        </article>
+
+        <!-- Page Break for Shopping List -->
+        <div class="page-break"></div>
+
+        <!-- Shopping List Section -->
+        <section class="mt-16 border-t-4 border-gold pt-12 print:mt-0 print:border-none">
+            <h2 class="text-3xl text-purple serif font-bold mb-8 text-center">Handleliste & Oversikt</h2>
+
+            <div class="bg-white p-8 shadow-sm border border-gray-200 rounded-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                    <!-- Cheeses -->
+                    <div>
+                        <h3 class="text-gold font-bold uppercase tracking-widest border-b border-gray-200 pb-2 mb-4">
+                            Oster</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Brillat-Savarin eller Brie
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Parmesan (helt stykke)
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Comté
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Gruyère (moden)
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Fetaost
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Morbier eller Reblochon
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Meats -->
+                    <div>
+                        <h3 class="text-gold font-bold uppercase tracking-widest border-b border-gray-200 pb-2 mb-4">
+                            Kjøtt & Spekemat</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Mild spekeskinke
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Trøffelsalami
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> San Daniele-skinke
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Lardo
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Rillettes / Grov landpaté
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Spekepølse med fennikel
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Bayonne-skinke
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Misc -->
+                    <div class="md:col-span-2 mt-4">
+                        <h3 class="text-gold font-bold uppercase tracking-widest border-b border-gray-200 pb-2 mb-4">
+                            Tilbehør</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Store grønne oliven
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> God olivenolje
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-4 h-4 border border-purple rounded-sm"></span> Godt brød/kjeks
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 flex justify-between items-center text-sm text-gray-500">
+                    <span>Estimert vinkostnad: <strong>4 275,10 kr</strong></span>
+                    <span>Foreningen Winedentity 2025</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

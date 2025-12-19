@@ -1,0 +1,192 @@
+{% extends "base.jinja2" %}
+
+{% block title %}{{ data.event_details['event_name-NO'] }} - {{ data.event_details.theme }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-8 print:space-y-0 print:block">
+
+    <!-- Control Panel (Hidden on Print) -->
+    <div class="fixed bottom-6 right-6 z-50 print:hidden no-print">
+        <button onclick="window.print()"
+            class="bg-brand-purple text-brand-gold px-6 py-3 rounded-full shadow-lg font-bold hover:bg-brand-purple-dark transition flex items-center gap-2 border-2 border-brand-gold">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Skriv ut / Lag PDF
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="text-center mb-12 border-b-2 border-brand-gold pb-8 print:mb-8 print:pb-4">
+        <div class="uppercase tracking-widest text-sm text-gray-500 mb-2">{{ data.event_details.organization }}</div>
+        <h1 class="text-4xl md:text-5xl text-brand-purple-dark font-bold font-['Cinzel'] mb-2">{{
+            data.event_details['event_name-NO'] }}</h1>
+        <p class="text-xl font-serif italic text-brand-gold-dark">{{ data.event_details.theme }}</p>
+    </header>
+
+    {% for wine in data.wines %}
+    <!-- Wine Card: {{ wine.name }} -->
+    <article
+        class="bg-white p-8 mb-8 relative rounded-sm shadow-md border-t-4 border-brand-gold print:shadow-none print:border print:border-gray-200 print:mb-8 print:break-inside-avoid">
+
+        <!-- Magnum Badge logic (example assumption: volume > 75cl) -->
+        {% if wine['volume-CL'] > 75 %}
+        <div
+            class="absolute top-0 right-0 bg-brand-gold/20 text-brand-gold-dark text-xs font-bold px-3 py-1 uppercase tracking-wide rounded-bl-lg border-b border-l border-brand-gold/30 print:bg-gray-100 print:text-black">
+            Magnum ({{ wine['volume-CL']/100 }}L)
+        </div>
+        {% endif %}
+
+        <div class="flex justify-between items-start mb-4 border-b border-gray-100 pb-4">
+            <div class="flex flex-col max-w-[70%]">
+                <h2 class="text-2xl md:text-3xl text-brand-purple-dark font-['Cinzel'] font-bold mb-1">
+                    {{ wine.producer }}
+                </h2>
+                <span class="text-lg font-bold text-gray-600">
+                    {% if wine.vintage %}{{ wine.vintage }} {% endif %}{{ wine.name }}
+                </span>
+            </div>
+
+            {% if wine.vinmonopolet_varenummer %}
+            <div class="flex flex-col items-end ml-4 flex-shrink-0">
+                <img src="{{ wine.vinmonopolet_varenummer | vinmonopolet_qr }}" alt="Vinmonopolet: {{ wine.name }}"
+                    class="w-28 h-28 shadow-sm border border-gray-100 rounded-sm print:shadow-none bg-white p-1">
+                <div class="text-[10px] text-brand-purple mt-1 font-bold font-['Cinzel']">
+                    <a href="https://www.vinmonopolet.no/p/{{ wine.vinmonopolet_varenummer }}" target="_blank"
+                        class="hover:underline">
+                        🔗 Vinmonopolet: {{ wine.vinmonopolet_varenummer }}
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-2 gap-6 mb-6 text-sm">
+            <div>
+                <span class="block text-brand-gold-dark font-bold uppercase text-xs">Område</span>
+                {% set country_flags = {'France': 'fr', 'Italy': 'it', 'Greece': 'gr', 'Spain': 'es', 'Germany': 'de',
+                'USA': 'us', 'Portugal': 'pt', 'Austria': 'at'} %}
+                {% set flag_code = country_flags.get(wine.country, 'xx') %}
+                <span class="flag-icon flag-icon-{{ flag_code }} mr-1 shadow-sm"></span> {{ wine.region }}
+            </div>
+            <div>
+                <span class="block text-brand-gold-dark font-bold uppercase text-xs">Type</span>
+                {{ wine.type }}
+            </div>
+            <div>
+                <span class="block text-brand-gold-dark font-bold uppercase text-xs">Drue</span>
+                {{ wine.grape_variety }}
+            </div>
+            <div>
+                <span class="block text-brand-gold-dark font-bold uppercase text-xs">Pris</span>
+                {{ "{:,.2f}".format(wine['price-NOK']).replace(',', ' ').replace('.', ',') }} kr
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="font-['Cinzel'] text-brand-purple-dark text-lg border-b border-brand-purple/20 mb-3 pb-1">Om
+                    Vinen</h3>
+                <p class="text-gray-700 italic text-sm mb-4">
+                    <strong class="not-italic text-brand-purple">I glasset:</strong> {{
+                    wine['description-NO']['tasting_notes-NO'] }}
+                </p>
+                <p class="text-gray-700 text-sm leading-relaxed">
+                    <strong class="text-brand-purple font-bold">Produsenten:</strong> {{
+                    wine['description-NO']['about_producer-NO'] }}
+                </p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded border border-gray-100 print:bg-transparent print:border-gray-200">
+                <div>
+                    <h3 class="font-['Cinzel'] text-brand-purple-dark text-lg mb-2">Charcuterie</h3>
+                    <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+                        {% for item in wine['food_pairing-NO']['items-NO'] %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p class="text-xs text-gray-500 mt-2 italic">{{ wine['food_pairing-NO']['summary-NO'] }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="mt-8 pt-4">
+            <p class="uppercase text-xs font-bold text-gray-400 mb-1">Mine Notater</p>
+            <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+            <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+            <div class="w-full h-8 border-b border-gray-300 note-line"></div>
+        </div>
+
+        <!-- Rating Circles -->
+        <div class="flex justify-end mt-4 gap-2 items-center">
+            <span class="text-xs uppercase font-bold text-gray-400 mr-2">Poeng:</span>
+            <div class="w-16 h-8 border-b border-gray-400"></div>
+            <div class="text-xl leading-none text-gray-400">/ 100</div>
+        </div>
+    </article>
+    {% endfor %}
+
+
+</div>
+
+<style>
+    @media print {
+        @page {
+            margin: 1.5cm;
+            size: A4;
+        }
+
+        /* Essential Print Resets */
+        body {
+            background: white !important;
+            color: black;
+            font-size: 10pt;
+            /* slightly loose for readability */
+        }
+
+        nav,
+        footer,
+        .no-print {
+            display: none !important;
+        }
+
+        /* Ensure backgrounds print for badges etc */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* Layout fixes */
+        .max-w-4xl {
+            max-width: none !important;
+            width: 100% !important;
+            margin: 0 !important;
+        }
+
+        .break-inside-avoid {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .break-before-page {
+            break-before: page;
+            page-break-before: always;
+        }
+
+        article {
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+            border-top: 4px solid #ecc247 !important;
+            /* Brand gold */
+        }
+
+        /* Hide URL artifacts */
+        a[href]:after {
+            content: none !important;
+        }
+    }
+</style>
+{% endblock %}

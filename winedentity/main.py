@@ -5,8 +5,10 @@ import os
 from flask import render_template, redirect, url_for, flash, session, request
 from . import app, db_manager
 from .forms import RegistrationForm
-from .utils import verify_recaptcha
+from .utils import verify_recaptcha, generate_vinmonopolet_qr
 from .countries import COUNTRIES
+
+app.jinja_env.filters['vinmonopolet_qr'] = generate_vinmonopolet_qr
 
 @app.context_processor
 def inject_env():
@@ -77,12 +79,27 @@ def success():
     return render_template('success.jinja2', full_name=full_name, membership_number=membership_number)
 
 # Routing Logic
+
+def wine_cards_view(year, event_slug):
+    # Construct file path
+    file_path = os.path.join(app.root_path, 'content', 'wine_cards', year, f'{event_slug}.json')
+    
+    if not os.path.exists(file_path):
+        return "Wine card data not found", 404
+        
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        
+    return render_template('wine_cards.jinja2', data=data, env=os.environ.get('ENV'))
+
 if os.environ.get('ENV') == 'local':
     app.add_url_rule('/', view_func=home_view)
     app.add_url_rule('/partner', view_func=partner_view)
     app.add_url_rule('/reg', view_func=register_view, methods=['GET', 'POST'])
+    app.add_url_rule('/wine_cards/<year>/<event_slug>', view_func=wine_cards_view)
 else:
     app.add_url_rule('/partner', view_func=partner_view)
+    app.add_url_rule('/wine_cards/<year>/<event_slug>', view_func=wine_cards_view)
     
     @app.route('/', methods=['GET', 'POST'])
     def dispatch():

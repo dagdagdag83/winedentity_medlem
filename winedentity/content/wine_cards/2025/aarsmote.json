@@ -1,0 +1,138 @@
+{
+    "event_details": {
+        "organization": "Foreningen Winedentity",
+        "event_name-NO": "Årsmøte 2025",
+        "theme": "Wine Tasting Cards",
+        "date": "2026-01-23",
+        "currency": "NOK"
+    },
+    "wines": [
+        {
+            "sequence_number": 1,
+            "vinmonopolet_varenummer": "599605",
+            "name": "Pierre Gimonnet Fleuron Blanc de Blancs Brut",
+            "vintage": "2016",
+            "producer": "Pierre Gimonnet",
+            "region": "Côte des Blancs",
+            "country": "France",
+            "grape_variety": "100% Chardonnay",
+            "type": "Vintage Champagne",
+            "volume-CL": 150,
+            "price-NOK": 1696.00,
+            "description-NO": {
+                "about_producer-NO": "Pierre Gimonnet er en referanseprodusent i Côte des Blancs (Cuis) og en mester på 'Grower Champagne'. De eier sine egne vinmarker og er kjent for viner med ekstrem presisjon, renhet og eleganse fremfor tung eikebruk.",
+                "tasting_notes-NO": "En årgangschampagne fra et flott år. Forvent duft av sitrus, epler, hvite blomster og kalkaktig mineralitet. Magnumflasken sørger for en ferskere og mer nyansert utvikling."
+            },
+            "food_pairing-NO": {
+                "summary-NO": "Saltet i skinken fremhever frukten i champagnen.",
+                "items-NO": [
+                    "Kremete oster (Brillat-Savarin eller Brie)",
+                    "Tynne skiver mild spekeskinke",
+                    "Trøffelsalami"
+                ]
+            }
+        },
+        {
+            "sequence_number": 2,
+            "vinmonopolet_varenummer": "14930501",
+            "name": "Ronco del Gnemiz 'Corrado di Manzano'",
+            "vintage": "2020",
+            "producer": "Ronco del Gnemiz",
+            "region": "Friuli",
+            "country": "Italy",
+            "grape_variety": "Chardonnay",
+            "type": "White Wine",
+            "volume-CL": 75,
+            "price-NOK": 505.00,
+            "description-NO": {
+                "about_producer-NO": "Ronco del Gnemiz er en liten 'kultprodusent' i Rosazzo-høydene. Serena Palazzolo lager viner med svært lave utbytter som er rike, konsentrerte og bygget for lang lagring. En stjerne i Nord-Italia.",
+                "tasting_notes-NO": "En kraftig og teksturert hvitvin. Moden gul frukt, smør, ristede nøtter og tydelig (men integrert) eikepreg. Den har likevel en frisk syre som renser munnen."
+            },
+            "food_pairing-NO": {
+                "summary-NO": "Regional match med San Daniele.",
+                "items-NO": [
+                    "San Daniele-skinke",
+                    "Lagret parmesan i biter",
+                    "Lardo",
+                    "Fete og faste oster (f.eks. Comté)"
+                ]
+            }
+        },
+        {
+            "sequence_number": 3,
+            "vinmonopolet_varenummer": "17478001",
+            "name": "Domain Bernard Gripa Saint-Joseph 'Le Berceau' Blanc",
+            "vintage": null,
+            "producer": "Domain Bernard Gripa",
+            "region": "Northern Rhône",
+            "country": "France",
+            "grape_variety": "100% Marsanne",
+            "type": "White Wine",
+            "volume-CL": 75,
+            "price-NOK": 659.60,
+            "description-NO": {
+                "about_producer-NO": "Gripa-familien har laget vin i generasjoner og 'Le Berceau' er deres toppvin. Druene kommer fra vinstokker som er nesten 100 år gamle, noe som gir en enorm dybde og konsentrasjon i vinen.",
+                "tasting_notes-NO": "En stor, fyldig og nesten 'oljete' hvitvin. Se etter aromaer av aprikos, honning, bivoks og hvite blomster. Den har en saltaktig mineralitet i avslutningen."
+            },
+            "food_pairing-NO": {
+                "summary-NO": "Vinen takler fettet i patéen utmerket.",
+                "items-NO": [
+                    "Rillettes eller grov landpaté",
+                    "Moden Gruyère",
+                    "Spekepølse med fennikel"
+                ]
+            }
+        },
+        {
+            "sequence_number": 4,
+            "vinmonopolet_varenummer": "17428101",
+            "name": "Thymiopoulos Kayafas",
+            "vintage": "2022",
+            "producer": "Thymiopoulos Vineyards",
+            "region": "Naoussa",
+            "country": "Greece",
+            "grape_variety": "Xinomavro",
+            "type": "Red Wine",
+            "volume-CL": 75,
+            "price-NOK": 689.90,
+            "description-NO": {
+                "about_producer-NO": "Apostolos Thymiopoulos er superstjernen som moderniserte gresk vin. Han driver biodynamisk og lager Xinomavro som fremhever eleganse og frukt, fremfor det rustikke og harde.",
+                "tasting_notes-NO": "Ofte kalt 'Hellas' Barolo'. En elegant, men fast rødvin med duft av soltørket tomat, røde bær, urter og oliven. Frisk syre og tydelige tanniner."
+            },
+            "food_pairing-NO": {
+                "summary-NO": "Perfekt match med oliven.",
+                "items-NO": [
+                    "Store grønne oliven",
+                    "Fetaost med god olivenolje",
+                    "Krydret salami",
+                    "Lammepølse"
+                ]
+            }
+        },
+        {
+            "sequence_number": 5,
+            "vinmonopolet_varenummer": "19088601",
+            "name": "Remoissenet Beaune 1er Cru 'Les Bressandes'",
+            "vintage": null,
+            "producer": "Remoissenet Père et Fils",
+            "region": "Burgundy",
+            "country": "France",
+            "grape_variety": "Pinot Noir",
+            "type": "Red Wine",
+            "volume-CL": 75,
+            "price-NOK": 719.90,
+            "description-NO": {
+                "about_producer-NO": "Remoissenet Père et Fils er et historisk handelshus i Beaune, kjent for sitt enorme bibliotek av gamle årganger. De siste årene har kvaliteten skutt i været med fokus på presisjon og klassisk burgunder-stil.",
+                "tasting_notes-NO": "En sjarmerende og 'kjøttfull' Pinot Noir. Duft av jordbær, moreller, litt skogbunn og krydder. Les Bressandes-vinmarken gir viner som kombinerer kraft med silkeaktig munnfølelse."
+            },
+            "food_pairing-NO": {
+                "summary-NO": "Unngå for sterk chili i maten her, la frukten i vinen skinne.",
+                "items-NO": [
+                    "Terrine/paté",
+                    "Milde oster (som Morbier eller Reblochon)",
+                    "God Bayonne-skinke"
+                ]
+            }
+        }
+    ]
+}
