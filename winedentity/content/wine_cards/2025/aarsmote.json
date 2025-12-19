@@ -16,7 +16,7 @@
             "region": "Côte des Blancs",
             "country": "France",
             "grape_variety": "100% Chardonnay",
-            "type": "Vintage Champagne",
+            "type-NO": "Vintage Champagne",
             "volume-CL": 150,
             "price-NOK": 1696.00,
             "description-NO": {
@@ -41,7 +41,7 @@
             "region": "Friuli",
             "country": "Italy",
             "grape_variety": "Chardonnay",
-            "type": "White Wine",
+            "type-NO": "Hvit vin",
             "volume-CL": 75,
             "price-NOK": 505.00,
             "description-NO": {
@@ -67,7 +67,7 @@
             "region": "Northern Rhône",
             "country": "France",
             "grape_variety": "100% Marsanne",
-            "type": "White Wine",
+            "type-NO": "Hvit vin",
             "volume-CL": 75,
             "price-NOK": 659.60,
             "description-NO": {
@@ -92,7 +92,7 @@
             "region": "Naoussa",
             "country": "Greece",
             "grape_variety": "Xinomavro",
-            "type": "Red Wine",
+            "type-NO": "Rød vin",
             "volume-CL": 75,
             "price-NOK": 689.90,
             "description-NO": {
@@ -118,7 +118,7 @@
             "region": "Burgundy",
             "country": "France",
             "grape_variety": "Pinot Noir",
-            "type": "Red Wine",
+            "type-NO": "Rød vin",
             "volume-CL": 75,
             "price-NOK": 719.90,
             "description-NO": {
