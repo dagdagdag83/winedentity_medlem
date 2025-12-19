@@ -2,7 +2,7 @@ import datetime
 import logging
 import json
 import os
-from flask import render_template, redirect, url_for, flash, session, request
+from flask import render_template, redirect, url_for, flash, session, request, jsonify
 from . import app, db_manager
 from .forms import RegistrationForm
 from .utils import verify_recaptcha, generate_vinmonopolet_qr
@@ -89,6 +89,10 @@ def wine_cards_view(year, event_slug):
         
     with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
+
+    # Check for JSON request via query param or header
+    if request.args.get('format') == 'json' or request.accept_mimetypes.best == 'application/json':
+        return jsonify(data)
         
     return render_template('wine_cards.jinja2', data=data, env=os.environ.get('ENV'))
 

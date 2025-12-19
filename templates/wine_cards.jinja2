@@ -19,7 +19,7 @@
     </div>
 
     <!-- Header -->
-    <header class="text-center mb-12 border-b-2 border-brand-gold pb-8 print:mb-8 print:pb-4">
+    <header class="text-center mb-12 border-b-2 border-brand-gold pb-8 print:hidden">
         <div class="uppercase tracking-widest text-sm text-gray-500 mb-2">{{ data.event_details.organization }}</div>
         <h1 class="text-4xl md:text-5xl text-brand-purple-dark font-bold font-['Cinzel'] mb-2">{{
             data.event_details['event_name-NO'] }}</h1>
@@ -63,7 +63,7 @@
             {% endif %}
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-2 gap-6 mb-6 text-sm">
+        <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-6 mb-6 text-sm">
             <div>
                 <span class="block text-brand-gold-dark font-bold uppercase text-xs">Område</span>
                 {% set country_flags = {'France': 'fr', 'Italy': 'it', 'Greece': 'gr', 'Spain': 'es', 'Germany': 'de',
@@ -78,10 +78,6 @@
             <div>
                 <span class="block text-brand-gold-dark font-bold uppercase text-xs">Drue</span>
                 {{ wine.grape_variety }}
-            </div>
-            <div>
-                <span class="block text-brand-gold-dark font-bold uppercase text-xs">Pris</span>
-                {{ "{:,.2f}".format(wine['price-NOK']).replace(',', ' ').replace('.', ',') }} kr
             </div>
         </div>
 
@@ -140,15 +136,21 @@
         }
 
         /* Essential Print Resets */
+        html,
         body {
             background: white !important;
             color: black;
             font-size: 10pt;
-            /* slightly loose for readability */
+            margin: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
         }
 
+        /* Hide Base Elements */
         nav,
         footer,
+        .grecaptcha-badge,
+        header>div.bg-cover,
         .no-print {
             display: none !important;
         }
